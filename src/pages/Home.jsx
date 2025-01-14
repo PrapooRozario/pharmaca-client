@@ -1,4 +1,5 @@
 import Category from "@/components/Category";
+import DiscountProducts from "@/components/DiscountProducts";
 import Slider from "@/components/Slider";
 
 const Home = () => {
@@ -6,6 +7,7 @@ const Home = () => {
     <div>
       <Slider></Slider>
       <Category></Category>
+      <DiscountProducts></DiscountProducts>
     </div>
   );
 };
