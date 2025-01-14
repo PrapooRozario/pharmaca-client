@@ -1,9 +1,11 @@
+import Category from "@/components/Category";
 import Slider from "@/components/Slider";
 
 const Home = () => {
   return (
     <div>
-        <Slider></Slider>
+      <Slider></Slider>
+      <Category></Category>
     </div>
   );
 };
