@@ -4,9 +4,10 @@ import clsx from "clsx";
 import { ArrowLeft } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
+import { Link } from "react-router";
 const SignUp = () => {
-    const { register, handleSubmit, formState } = useForm(); // Initialize form handling
-    
+  const { register, handleSubmit, formState } = useForm(); // Initialize form handling
+
   const handleSignUp = (data) => {
     console.log(data); // Handle form submission
   };
@@ -20,7 +21,6 @@ const SignUp = () => {
       >
         <ArrowLeft></ArrowLeft> Go Back
       </Button>
-
       <div>
         {/* Form */}
         <form
@@ -184,6 +184,14 @@ const SignUp = () => {
           >
             <FcGoogle className="text-3xl"></FcGoogle>Sign Up with Google
           </button>
+          <div className="text-center">
+            <p>
+              Already Have an Account?{" "}
+              <Link to="/auth/login" className="text-[#1158DB]">
+                Login
+              </Link>
+            </p>
+          </div>
         </form>
       </div>
     </div>
