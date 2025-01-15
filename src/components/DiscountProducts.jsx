@@ -12,11 +12,10 @@ const DiscountProducts = () => {
   const { data: products = [] } = useQuery({
     queryKey: ["DiscountedProducts"],
     queryFn: async () => {
-      const res = await axiosPublic.get("/products/discount");
+      const res = await axiosPublic.get("/products/discounted");
       return res.data;
     },
   });
-    console.log(products)
   return (
     <div className="container mx-auto px-4 mb-20">
       <div className="mb-10">
@@ -26,11 +25,10 @@ const DiscountProducts = () => {
       </div>
       <div>
         <Swiper
-          slidesPerView={4}
           spaceBetween={10}
           breakpoints={{
             640: {
-              slidesPerView: 2,
+              slidesPerView: 1,
               spaceBetween: 20,
             },
             768: {
