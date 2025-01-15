@@ -1,5 +1,5 @@
 import { ArrowRight, Dot, Menu, ShoppingBag } from "lucide-react";
-import { NavLink } from "react-router";
+import { Link, NavLink } from "react-router";
 import UsFlag from "@/assets/US_FLAG.svg";
 import BdFlag from "@/assets/BD_FLAG.svg";
 import {
@@ -18,7 +18,9 @@ const Navbar = () => {
       <div className="flex items-center justify-between">
         {/* Brand Logo */}
         <div>
-          <img src="/public/pharmaca.svg" alt="pharmaca" />
+          <Link to="/">
+            <img src="/public/pharmaca.svg" alt="pharmaca" />
+          </Link>
         </div>
         {/* Navbar Mobile */}
         <div className="md:hidden">
@@ -29,10 +31,16 @@ const Navbar = () => {
             <DropdownMenuContent className="w-[200px] p-4 md:hidden mr-14">
               {/* NavLinks */}
               <ul className="flex flex-col space-y-2 *:text-neutral-600 *:font-medium *:text-lg">
-                <NavLink className="hover:text-black transition duration-150">
+                <NavLink
+                  to="/"
+                  className="hover:text-black transition duration-150"
+                >
                   Home
                 </NavLink>
-                <NavLink className="hover:text-black transition duration-150">
+                <NavLink
+                  to="/shop"
+                  className="hover:text-black transition duration-150"
+                >
                   Shop
                 </NavLink>
                 <div className="flex flex-col pt-4 gap-8">
@@ -76,9 +84,11 @@ const Navbar = () => {
                     </DropdownMenuContent>
                   </DropdownMenu>
                   {/* Button */}
-                  <Button className={buttonVariants({ variant: "primary" })}>
-                    Join Us <ArrowRight className="w-5" />
-                  </Button>
+                  <Link to="/auth/signup">
+                    <Button className={buttonVariants({ variant: "primary" })}>
+                      Join Us <ArrowRight className="w-5" />
+                    </Button>
+                  </Link>
                 </div>
               </ul>
             </DropdownMenuContent>
@@ -86,10 +96,13 @@ const Navbar = () => {
         </div>
         {/* Navbar Tablet/Pc */}
         <ul className="md:flex items-center gap-8 *:text-neutral-600 *:font-medium *:text-lg hidden">
-          <NavLink className="hover:text-black transition duration-150">
+          <NavLink to="/" className="hover:text-black transition duration-150">
             Home
           </NavLink>
-          <NavLink className="hover:text-black transition duration-150">
+          <NavLink
+            to="/shop"
+            className="hover:text-black transition duration-150"
+          >
             Shop
           </NavLink>
         </ul>
@@ -133,9 +146,11 @@ const Navbar = () => {
             </DropdownMenuContent>
           </DropdownMenu>
           {/* {Button} */}
-          <Button className={buttonVariants({ variant: "primary" })}>
-            Join Us <ArrowRight className="w-5" />
-          </Button>
+          <Link to="/auth/signup">
+            <Button className={buttonVariants({ variant: "primary" })}>
+              Join Us <ArrowRight className="w-5" />
+            </Button>
+          </Link>
         </div>
       </div>
     </div>
