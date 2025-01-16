@@ -4,6 +4,7 @@ import Home from "@/pages/Home";
 import Login from "@/pages/Login";
 import SignUp from "@/pages/SignUp";
 import { Route, Routes } from "react-router";
+import AuthPrivateRoute from "./AuthPrivateRoute";
 
 const Router = () => {
   return (
@@ -12,8 +13,22 @@ const Router = () => {
         <Route index element={<Home></Home>}></Route>
       </Route>
       <Route path="/auth" element={<Auth></Auth>}>
-        <Route path="/auth/signup" element={<SignUp></SignUp>}></Route>
-        <Route path="/auth/login" element={<Login></Login>}></Route>
+        <Route
+          path="/auth/signup"
+          element={
+            <AuthPrivateRoute>
+              <SignUp></SignUp>
+            </AuthPrivateRoute>
+          }
+        ></Route>
+        <Route
+          path="/auth/login"
+          element={
+            <AuthPrivateRoute>
+              <Login></Login>
+            </AuthPrivateRoute>
+          }
+        ></Route>
       </Route>
     </Routes>
   );

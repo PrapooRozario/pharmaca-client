@@ -16,6 +16,7 @@ const AuthProvider = ({ children }) => {
   const googleProvider = new GoogleAuthProvider();
 
   const [user, setUser] = useState(null);
+  const [loader, setLoader] = useState(true);
 
   const signup = (email, password) => {
     return createUserWithEmailAndPassword(auth, email, password);
@@ -39,21 +40,31 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
+      setLoader(false);
       axiosSecure
         .post("/jwt", {
           username: currentUser?.displayName,
           email: currentUser?.email,
         })
-        .then((res) => localStorage.setItem('token', res?.data))
+        .then((res) => localStorage.setItem("token", res?.data));
     });
     return () => unsubscribe();
   }, []);
-
   const logout = () => {
     signOut(auth);
   };
 
-  const authInfo = { signup, google, user, setUser, updateUser, login, logout };
+  const authInfo = {
+    signup,
+    google,
+    user,
+    setUser,
+    updateUser,
+    login,
+    logout,
+    loader,
+    setLoader
+  };
 
   return (
     <authContext.Provider value={authInfo}>{children}</authContext.Provider>
