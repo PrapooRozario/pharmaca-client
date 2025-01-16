@@ -13,7 +13,7 @@ import { Button, buttonVariants } from "./ui/button";
 import useAuth from "@/hooks/useAuth";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 const Navbar = () => {
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
   const [language, setLanguage] = useState("Eng");
   console.log(user);
   return (
@@ -87,11 +87,44 @@ const Navbar = () => {
                     </DropdownMenuContent>
                   </DropdownMenu>
                   {/* Button */}
-                  <Link to="/auth/signup">
-                    <Button className={buttonVariants({ variant: "primary" })}>
-                      Join Us <ArrowRight className="w-5" />
-                    </Button>
-                  </Link>
+                  {user && user?.email ? (
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <Avatar className="cursor-pointer">
+                          <AvatarImage src={user?.photoURL} alt="@shadcn" />
+                          <AvatarFallback>
+                            {user?.displayName?.charAt(0).toUpperCase()}
+                          </AvatarFallback>
+                        </Avatar>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent className="w-56 md:hidden p-4">
+                        <ul className="flex flex-col space-y-3">
+                          <NavLink className="font-medium hover:text-black text-neutral-600 transition duration-200">
+                            Update Profile
+                          </NavLink>
+                          <NavLink className="font-medium hover:text-black text-neutral-600 transition duration-200">
+                            Dashboard
+                          </NavLink>
+                          <Button
+                            onClick={logout}
+                            className={`${buttonVariants({
+                              variant: "primary",
+                            })} w-fit px-6`}
+                          >
+                            Logout
+                          </Button>
+                        </ul>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  ) : (
+                    <Link to="/auth/signup">
+                      <Button
+                        className={buttonVariants({ variant: "primary" })}
+                      >
+                        Join Us <ArrowRight className="w-5" />
+                      </Button>
+                    </Link>
+                  )}
                 </div>
               </ul>
             </DropdownMenuContent>
@@ -150,10 +183,34 @@ const Navbar = () => {
           </DropdownMenu>
           {/* {Button} */}
           {user && user?.email ? (
-            <Avatar>
-              <AvatarImage src={user?.photoURL} alt="@shadcn" />
-              <AvatarFallback>{ (user?.displayName)?.charAt(0).toUpperCase()}</AvatarFallback>
-            </Avatar>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Avatar className="cursor-pointer">
+                  <AvatarImage src={user?.photoURL} alt="@shadcn" />
+                  <AvatarFallback>
+                    {user?.displayName?.charAt(0).toUpperCase()}
+                  </AvatarFallback>
+                </Avatar>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-56 hidden md:block p-4">
+                <ul className="flex flex-col space-y-3">
+                  <NavLink className="font-medium hover:text-black text-neutral-600 transition duration-200">
+                    Update Profile
+                  </NavLink>
+                  <NavLink className="font-medium hover:text-black text-neutral-600 transition duration-200">
+                    Dashboard
+                  </NavLink>
+                  <Button
+                    onClick={logout}
+                    className={`${buttonVariants({
+                      variant: "primary",
+                    })} w-fit px-6`}
+                  >
+                    Logout
+                  </Button>
+                </ul>
+              </DropdownMenuContent>
+            </DropdownMenu>
           ) : (
             <Link to="/auth/signup">
               <Button className={buttonVariants({ variant: "primary" })}>

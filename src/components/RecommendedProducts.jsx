@@ -3,11 +3,11 @@ import useAxios from "@/hooks/useAxios";
 import { useQuery } from "@tanstack/react-query";
 
 const RecommendedProducts = () => {
-  const [axiosPublic] = useAxios();
+  const [axiosSecure] = useAxios();
   const { data: products = [] } = useQuery({
     queryKey: ["RecommendedProducts"],
     queryFn: async () => {
-      const res = await axiosPublic.get("/products/recommended");
+      const res = await axiosSecure.get("/products/recommended");
       return res.data;
     },
   });
