@@ -10,7 +10,7 @@ const Footer = () => {
   return (
     <footer className="w-full bg-white p-8">
       <div className="flex flex-row flex-wrap items-center justify-center gap-y-6 gap-x-12 bg-white text-center md:justify-between">
-        <img src="/public/pharmaca.svg" alt="Pharmaca" className="w-44" />
+        <img src="/pharmaca.svg" alt="Pharmaca" className="w-44" />
         <ul className="flex flex-wrap items-center gap-y-2 gap-x-8">
           <li>
             <NavLink
@@ -21,7 +21,10 @@ const Footer = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink to='/shop' className="font-normal transition-colors hover:text-blue-500 focus:text-blue-500">
+            <NavLink
+              to="/shop"
+              className="font-normal transition-colors hover:text-blue-500 focus:text-blue-500"
+            >
               Shop
             </NavLink>
           </li>

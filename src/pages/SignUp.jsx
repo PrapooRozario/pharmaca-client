@@ -1,23 +1,56 @@
 import { Button, buttonVariants } from "@/components/ui/button";
+import { ToastAction } from "@/components/ui/toast";
+import { toast } from "@/hooks/use-toast";
+import useAuth from "@/hooks/useAuth";
 import { Field, Input, Label } from "@headlessui/react";
+import axios from "axios";
 import clsx from "clsx";
 import { ArrowLeft } from "lucide-react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 const SignUp = () => {
+  const { signup, google, setUser, updateUser } = useAuth();
   const { register, handleSubmit, formState } = useForm(); // Initialize form handling
-
+  const navigate = useNavigate();
+  const [photoURL, setPhotoURL] = useState(null);
   const handleSignUp = (data) => {
-    console.log(data); // Handle form submission
+    const image = data?.photo[0];
+    axios
+      .post(
+        "https://api.imgbb.com/1/upload?key=8e369a2647315bf7a367154ce8609b1f",
+        { image },
+        { headers: { "Content-Type": "multipart/form-data" } }
+      )
+      .then((res) => setPhotoURL(res?.data?.data?.display_url))
+      .catch((err) => console.log(err));
+    if (!photoURL) return;
+    signup(data?.email, data?.password)
+      .then((user) => {
+        setUser(user.user),
+          updateUser(data?.username, photoURL),
+          toast({
+            title: "Success",
+            description: "Signup successful! Welcome to pharmaca.",
+            action: <ToastAction altText="Sign up complete.">Ok</ToastAction>,
+          });
+      })
+      .catch((err) => {
+        toast({
+          title: "Error",
+          variant: "destructive",
+          description: err?.code,
+          action: <ToastAction altText="Error">Ok</ToastAction>,
+        });
+      });
   };
-
   return (
     <div>
       {/* Back Button */}
       <Button
         className={`${buttonVariants({ variant: "primary" })} fixed top-6 `}
-        onClick={() => window.history.go(-1)} // Navigate back
+        onClick={() => navigate("/")} // Navigate back
       >
         <ArrowLeft></ArrowLeft> Go Back
       </Button>
@@ -179,6 +212,29 @@ const SignUp = () => {
           <hr /> {/* Horizontal Line */}
           {/* Google Sign-Up Button */}
           <button
+            onClick={() =>
+              google()
+                .then((user) => {
+                  setUser(user?.user),
+                    toast({
+                      title: "Success",
+                      description:
+                        "Signup successful! Welcome to pharmaca.",
+                      action: (
+                        <ToastAction altText="Signup complete.">Ok</ToastAction>
+                      ),
+                    });
+                })
+                .catch((err) => {
+                  toast({
+                    title: "Error",
+
+                    variant: "destructive",
+                    description: err?.code,
+                    action: <ToastAction altText="Error">Ok</ToastAction>,
+                  });
+                })
+            }
             type="button"
             className="flex items-center gap-4 border rounded-lg px-6 py-2 font-medium w-full justify-center"
           >

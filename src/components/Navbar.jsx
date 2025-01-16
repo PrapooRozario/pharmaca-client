@@ -10,16 +10,19 @@ import {
 } from "./ui/dropdown-menu";
 import { useState } from "react";
 import { Button, buttonVariants } from "./ui/button";
+import useAuth from "@/hooks/useAuth";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 const Navbar = () => {
+  const { user } = useAuth();
   const [language, setLanguage] = useState("Eng");
-  console.log(language);
+  console.log(user);
   return (
     <div>
       <div className="flex items-center justify-between">
         {/* Brand Logo */}
         <div>
           <Link to="/">
-            <img src="/public/pharmaca.svg" alt="pharmaca" />
+            <img src="/pharmaca.svg" alt="pharmaca" />
           </Link>
         </div>
         {/* Navbar Mobile */}
@@ -146,11 +149,18 @@ const Navbar = () => {
             </DropdownMenuContent>
           </DropdownMenu>
           {/* {Button} */}
-          <Link to="/auth/signup">
-            <Button className={buttonVariants({ variant: "primary" })}>
-              Join Us <ArrowRight className="w-5" />
-            </Button>
-          </Link>
+          {user && user?.email ? (
+            <Avatar>
+              <AvatarImage src={user?.photoURL} alt="@shadcn" />
+              <AvatarFallback>{ (user?.displayName)?.charAt(0).toUpperCase()}</AvatarFallback>
+            </Avatar>
+          ) : (
+            <Link to="/auth/signup">
+              <Button className={buttonVariants({ variant: "primary" })}>
+                Join Us <ArrowRight className="w-5" />
+              </Button>
+            </Link>
+          )}
         </div>
       </div>
     </div>

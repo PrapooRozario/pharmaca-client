@@ -1,16 +1,38 @@
 import { Button, buttonVariants } from "@/components/ui/button";
+import { ToastAction } from "@/components/ui/toast";
+import { toast } from "@/hooks/use-toast";
+import useAuth from "@/hooks/useAuth";
 import { Field, Input } from "@headlessui/react";
 import { Label } from "@radix-ui/react-dropdown-menu";
 import clsx from "clsx";
 import { ArrowLeft } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 const Login = () => {
   const { register, handleSubmit, formState } = useForm();
+  const { login, setUser, google } = useAuth();
+  const navigate = useNavigate();
   const handleLogin = (data) => {
-    console.log(data);
+    login(data?.email, data?.password)
+      .then((user) => {
+        setUser(user?.user),
+          toast({
+            title: "Success",
+            description: "Login successful! Welcome back to pharmaca.",
+            action: <ToastAction altText="Login complete.">Ok</ToastAction>,
+          });
+      })
+      .catch((err) => {
+        toast({
+          title: "Error",
+
+          variant: "destructive",
+          description: err?.code,
+          action: <ToastAction altText="Error">Ok</ToastAction>,
+        });
+      });
   };
   return (
     <div>
@@ -18,7 +40,7 @@ const Login = () => {
         {/* Back Button */}
         <Button
           className={`${buttonVariants({ variant: "primary" })} fixed top-6 `}
-          onClick={() => window.history.go(-1)} // Navigate back
+          onClick={() => navigate("/")} // Navigate back
         >
           <ArrowLeft></ArrowLeft> Go Back
         </Button>
@@ -90,6 +112,31 @@ const Login = () => {
             {/* Google Login Button */}
             <button
               type="button"
+              onClick={() =>
+                google()
+                  .then((user) => {
+                    setUser(user?.user),
+                      toast({
+                        title: "Success",
+                        description:
+                          "Login successful! Welcome back to pharmaca.",
+                        action: (
+                          <ToastAction altText="Login complete.">
+                            Ok
+                          </ToastAction>
+                        ),
+                      });
+                  })
+                  .catch((err) => {
+                    toast({
+                      title: "Error",
+
+                      variant: "destructive",
+                      description: err?.code,
+                      action: <ToastAction altText="Error">Ok</ToastAction>,
+                    });
+                  })
+              }
               className="flex items-center gap-4 border rounded-lg px-6 py-2 font-medium w-full justify-center"
             >
               <FcGoogle className="text-3xl"></FcGoogle>Login with Google
@@ -97,7 +144,9 @@ const Login = () => {
             <div className="text-center">
               <p>
                 Don't Have an Account?{" "}
-                <Link to='/auth/signup' className="text-[#1158DB]">Sign Up</Link>
+                <Link to="/auth/signup" className="text-[#1158DB]">
+                  Sign Up
+                </Link>
               </p>
             </div>
           </form>
