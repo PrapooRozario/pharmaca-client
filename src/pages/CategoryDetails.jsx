@@ -1,4 +1,5 @@
 import { Button, buttonVariants } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import Slide1 from "@/assets/Slide1.webp";
 import {
   Table,
@@ -8,51 +9,32 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { ToastAction } from "@/components/ui/toast";
+import { toast } from "@/hooks/use-toast";
+import useAuth from "@/hooks/useAuth";
 import useAxios from "@/hooks/useAxios";
 import { useQuery } from "@tanstack/react-query";
-import { Eye, Search } from "lucide-react";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import { useEffect, useState } from "react";
-import { Input } from "@headlessui/react";
-import useAuth from "@/hooks/useAuth";
-import { toast } from "@/hooks/use-toast";
-import { ToastAction } from "@/components/ui/toast";
-import { useNavigate } from "react-router";
+import { Eye } from "lucide-react";
+import { useState } from "react";
+import { useNavigate, useParams } from "react-router";
 
-const Shop = () => {
-  const [axiosSecure] = useAxios(); // Custom hook for secure axios instance
+const CategoryDetails = () => {
+  const { category } = useParams();
+  const [axiosSecure] = useAxios();
   const { user } = useAuth();
   const navigate = useNavigate();
   const [discount, setDiscount] = useState(0); // State to track discount
-  const [sort, setSort] = useState("");
-  const [search, setSearch] = useState("");
-  const [totalProducts, setTotalProducts] = useState(0);
-  const [currentPage, setCurrentPage] = useState(0);
-  useEffect(() => {
-    if (totalProducts <= 10) {
-      setCurrentPage(0);
-    }
-  }, [totalProducts]);
   const {
-    data: products = [],
-    isLoading,
+    data: products,
     isError,
+    isLoading,
   } = useQuery({
-    queryKey: ["products", currentPage, sort, search],
+    queryKey: ["products", category],
     queryFn: async () => {
-      const res = await axiosSecure.get(
-        `/products?limit=${itemsPerPage}&skip=${
-          currentPage * itemsPerPage
-        }&sort=${sort}&search=${search}`
-      );
-      setTotalProducts(res.data?.productsCount);
-      return res.data.products; // Return fetched product data
+      const res = await axiosSecure.get(`/products/category/${category}`);
+      return res.data;
     },
   });
-  const itemsPerPage = 10;
-  const totalPages = totalProducts
-    ? Math.ceil(totalProducts / itemsPerPage)
-    : 0;
 
   const handleSelect = (_id) => {
     const cart = {
@@ -87,8 +69,8 @@ const Shop = () => {
   };
   return (
     <div className="my-10 px-4 md:px-6 lg:px-8">
-      {!products.length && !isLoading ? (
-        <div className="absolute top-[56%] z-10 right-[20%] left-[20%] flex justify-center items-center">
+      {!products?.length && !isLoading ? (
+        <div className="absolute top-[45%] z-10 right-[20%] left-[20%] flex justify-center items-center">
           <h1 className="md:text-2xl text-center text-lg font-medium">
             Oops! We couldn’t find what you’re looking for.
           </h1>
@@ -97,7 +79,7 @@ const Shop = () => {
         ""
       )}
       {isError && (
-        <div className="absolute top-[56%] z-10 right-[20%] left-[20%] flex justify-center items-center">
+        <div className="absolute top-[45%] z-10 right-[20%] left-[20%] flex justify-center items-center">
           <h1 className="md:text-2xl text-center text-lg font-medium">
             Oops! Something went wrong.
           </h1>
@@ -108,29 +90,6 @@ const Shop = () => {
           <div className="spinner"></div>
         </div>
       )}
-      <div className="mb-6 md:flex items-center justify-between">
-        <Button
-          onClick={() => {
-            if (sort === "") {
-              setSort("desc");
-            } else if (sort === "desc") {
-              setSort("asc");
-            } else {
-              setSort("");
-            }
-          }}
-          className={buttonVariants({ variant: "primary" })}
-        >
-          {sort === "desc" || sort === "asc" ? "Sorted" : "Sort"} By Price
-        </Button>
-        <div className="relative flex items-center md:mt-0 mt-4">
-          <Input
-            onChange={(e) => setSearch(e.target.value)}
-            className="border rounded-lg pr-4 pl-9 py-2 outline-none md:w-[360px] w-full"
-          ></Input>
-          <Search className="absolute top-[9px] w-5 mx-2 text-neutral-600"></Search>
-        </div>
-      </div>
       <Table className="w-full overflow-x-auto min-h-[calc(100vh-300px)]">
         <TableHeader>
           <TableRow>
@@ -145,7 +104,7 @@ const Shop = () => {
         <TableBody>
           {products?.map((product, index) => (
             <TableRow key={product?._id}>
-              <TableCell>{currentPage * itemsPerPage + index + 1}</TableCell>
+              <TableCell>{index + 1}</TableCell>
               <TableCell className="font-medium">
                 <div className="bg-blue-100 rounded-xl p-2">
                   <img
@@ -242,39 +201,8 @@ const Shop = () => {
           ))}
         </TableBody>
       </Table>
-      <div className="flex flex-wrap items-center gap-2 text-sm justify-center mt-6">
-        {/* Previous Button */}
-        <button
-          onClick={() => currentPage > 0 && setCurrentPage(currentPage - 1)}
-          disabled={currentPage === 0}
-          className="bg-[#1158dbe7] px-4 py-2 disabled:cursor-not-allowed disabled:bg-neutral-400 text-white rounded-xl font-medium cursor-pointer"
-        >
-          Previous
-        </button>
-
-        {/* Page Number Buttons */}
-        {Array.from({ length: totalPages || 1 }).map((_, index) => (
-          <div
-            key={index}
-            className={`bg-[#1158dbe7] px-4 py-2 text-white rounded-xl font-medium cursor-pointer ${
-              currentPage === index && "bg-neutral-600"
-            }`}
-          >
-            {index + 1}
-          </div>
-        ))}
-
-        {/* Next Button */}
-        <button
-          onClick={() => setCurrentPage(currentPage + 1)}
-          disabled={currentPage === totalPages - 1}
-          className="bg-[#1158dbe7] px-4 py-2 disabled:bg-neutral-400 disabled:cursor-not-allowed text-white rounded-xl font-medium cursor-pointer"
-        >
-          Next
-        </button>
-      </div>
     </div>
   );
 };
 
-export default Shop;
+export default CategoryDetails;

@@ -6,6 +6,7 @@ import SignUp from "@/pages/SignUp";
 import { Route, Routes } from "react-router";
 import AuthPrivateRoute from "./AuthPrivateRoute";
 import Shop from "@/pages/Shop";
+import CategoryDetails from "@/pages/CategoryDetails";
 
 const Router = () => {
   return (
@@ -13,6 +14,7 @@ const Router = () => {
       <Route path="/" element={<Main></Main>}>
         <Route index element={<Home></Home>}></Route>
         <Route path="/shop" element={<Shop></Shop>}></Route>
+        <Route path="/category/:category" element={<CategoryDetails></CategoryDetails>}></Route>
       </Route>
       <Route path="/auth" element={<Auth></Auth>}>
         <Route

@@ -41,17 +41,20 @@ const AuthProvider = ({ children }) => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       setLoader(false);
-      axiosSecure
-        .post("/jwt", {
-          username: currentUser?.displayName,
-          email: currentUser?.email,
-        })
-        .then((res) => localStorage.setItem("token", res?.data));
+      if (currentUser) {
+        axiosSecure
+          .post("/jwt", {
+            username: currentUser?.displayName,
+            email: currentUser?.email,
+          })
+          .then((res) => localStorage.setItem("token", res?.data));
+      }
     });
     return () => unsubscribe();
   }, []);
   const logout = () => {
     signOut(auth);
+    localStorage.removeItem("token");
   };
 
   const authInfo = {
@@ -63,7 +66,7 @@ const AuthProvider = ({ children }) => {
     login,
     logout,
     loader,
-    setLoader
+    setLoader,
   };
 
   return (
