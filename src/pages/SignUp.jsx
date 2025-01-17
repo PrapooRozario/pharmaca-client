@@ -10,11 +10,12 @@ import { ArrowLeft } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
-import { Link, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 const SignUp = () => {
   const { signup, google, setUser, updateUser } = useAuth();
   const { register, handleSubmit, formState } = useForm(); // Initialize form handling
   const navigate = useNavigate();
+  const { state } = useLocation();
   const [photoURL, setPhotoURL] = useState(null);
   const [axiosPublic] = useAxios();
   const handleSignUp = (data) => {
@@ -44,6 +45,7 @@ const SignUp = () => {
           description: "Signup successful! Welcome to pharmaca.",
           action: <ToastAction altText="Sign up complete.">Ok</ToastAction>,
         });
+        navigate(state ? state : "/");
       })
       .catch((err) => {
         toast({
@@ -238,6 +240,7 @@ const SignUp = () => {
                       <ToastAction altText="Signup complete.">Ok</ToastAction>
                     ),
                   });
+                  navigate(state ? state : "/");
                 })
                 .catch((err) => {
                   toast({

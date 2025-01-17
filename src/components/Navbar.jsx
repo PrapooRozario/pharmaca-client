@@ -143,7 +143,9 @@ const Navbar = () => {
           </NavLink>
         </ul>
         <div className="md:flex items-center gap-8 hidden">
-          <ShoppingBag className="text-neutral-600 w-6 cursor-pointer" />
+          <Link to="/products/cart">
+            <ShoppingBag className="text-neutral-600 w-6 cursor-pointer" />
+          </Link>
           <DropdownMenu>
             <DropdownMenuTrigger className="outline-0 cursor-pointer">
               {language === "Eng" ? (

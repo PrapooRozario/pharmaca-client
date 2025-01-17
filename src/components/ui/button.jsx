@@ -11,6 +11,8 @@ const buttonVariants = cva(
       variant: {
         form: "bg-[#1E6BFF] text-primary-foreground w-full hover:bg-[#1158db]",
         default: "bg-primary text-primary-foreground hover:bg-primary/90",
+        success:
+          "bg-[#50A151] text-primary-foreground hover:bg-[#488E48]",
         primary:
           "bg-[#1E6BFF] p-3 text-primary-foreground hover:bg-[#1158db] transition donation-100",
         destructive:

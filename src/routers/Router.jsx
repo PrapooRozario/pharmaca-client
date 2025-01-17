@@ -7,6 +7,8 @@ import { Route, Routes } from "react-router";
 import AuthPrivateRoute from "./AuthPrivateRoute";
 import Shop from "@/pages/Shop";
 import CategoryDetails from "@/pages/CategoryDetails";
+import Cart from "@/pages/Cart";
+import PrivateRoute from "./PrivateRoute";
 
 const Router = () => {
   return (
@@ -14,7 +16,18 @@ const Router = () => {
       <Route path="/" element={<Main></Main>}>
         <Route index element={<Home></Home>}></Route>
         <Route path="/shop" element={<Shop></Shop>}></Route>
-        <Route path="/category/:category" element={<CategoryDetails></CategoryDetails>}></Route>
+        <Route
+          path="/category/:category"
+          element={<CategoryDetails></CategoryDetails>}
+        ></Route>
+        <Route
+          path="/products/cart"
+          element={
+            <PrivateRoute>
+              <Cart></Cart>
+            </PrivateRoute>
+          }
+        ></Route>
       </Route>
       <Route path="/auth" element={<Auth></Auth>}>
         <Route
