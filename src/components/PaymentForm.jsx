@@ -5,14 +5,14 @@ import { Button, buttonVariants } from "./ui/button";
 import { toast } from "@/hooks/use-toast";
 import { ToastAction } from "./ui/toast";
 import PropTypes from "prop-types";
+import { useNavigate } from "react-router";
 
 const PaymentForm = ({ totalCartPrice, user_email, user_name, products }) => {
   const stripe = useStripe();
   const elements = useElements();
-  const [clientSecret, setClientSecret] = useState("");
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [axiosSecure] = useAxios();
-  console.log(products?.map((z) => console.log(z?.productId)));
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -28,8 +28,8 @@ const PaymentForm = ({ totalCartPrice, user_email, user_name, products }) => {
         amount: parseInt(totalCartPrice * 100),
       });
 
-      setClientSecret(data?.clientSecret);
-
+      const clientSecret = data?.clientSecret;
+      if (!clientSecret) return;
       const paymentResult = await stripe.confirmCardPayment(clientSecret, {
         payment_method: {
           card: card,
@@ -51,16 +51,22 @@ const PaymentForm = ({ totalCartPrice, user_email, user_name, products }) => {
             totalAmount: totalCartPrice,
             status: "pending",
           })
-          .then((result) => {
-            console.log(result);
-          })
-          .catch((err) => {
-            console.log(err);
+          .then(() => {
+            toast({
+              title: "Success",
+              description: "Payment successfully! Thanks for purchasing.",
+              action: <ToastAction altText="Payment complete.">Ok</ToastAction>,
+            });
           });
-        toast({
-          title: "Success",
-          description: "Payment successfully! Thanks for purchasing.",
-          action: <ToastAction altText="Payment complete.">Ok</ToastAction>,
+        navigate("/payment/invoice", {
+          state: {
+            transactionId: paymentResult?.paymentIntent?.id,
+            totalAmount: totalCartPrice,
+            products: products,
+            user_email,
+            user_name,
+            createdAt: paymentResult?.paymentIntent?.created,
+          },
         });
       }
     } catch {

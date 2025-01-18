@@ -10,6 +10,7 @@ import CategoryDetails from "@/pages/CategoryDetails";
 import Cart from "@/pages/Cart";
 import PrivateRoute from "./PrivateRoute";
 import Checkout from "@/pages/Checkout";
+import Invoice from "@/pages/Invoice";
 
 const Router = () => {
   return (
@@ -34,6 +35,14 @@ const Router = () => {
           element={
             <PrivateRoute>
               <Checkout></Checkout>
+            </PrivateRoute>
+          }
+        ></Route>
+        <Route
+          path="/payment/invoice"
+          element={
+            <PrivateRoute>
+              <Invoice></Invoice>
             </PrivateRoute>
           }
         ></Route>

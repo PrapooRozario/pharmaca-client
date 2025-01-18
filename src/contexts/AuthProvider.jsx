@@ -10,11 +10,12 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
+import PropTypes from 'prop-types';
 export const authContext = createContext(null);
-const [axiosSecure] = useAxios();
 const AuthProvider = ({ children }) => {
   const googleProvider = new GoogleAuthProvider();
-
+  
+  const [axiosSecure] = useAxios();
   const [user, setUser] = useState(null);
   const [loader, setLoader] = useState(true);
 
@@ -51,7 +52,7 @@ const AuthProvider = ({ children }) => {
       }
     });
     return () => unsubscribe();
-  }, []);
+  }, [axiosSecure]);
   const logout = () => {
     signOut(auth);
     localStorage.removeItem("token");
@@ -72,6 +73,10 @@ const AuthProvider = ({ children }) => {
   return (
     <authContext.Provider value={authInfo}>{children}</authContext.Provider>
   );
+};
+
+AuthProvider.propTypes = {
+  children: PropTypes.node.isRequired
 };
 
 export default AuthProvider;

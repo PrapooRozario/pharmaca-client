@@ -145,7 +145,7 @@ const Cart = () => {
       {!products?.length && !isLoading ? (
         <div className="absolute top-[45%] z-10 right-[20%] left-[20%] flex justify-center items-center">
           <h1 className="md:text-2xl text-center text-lg font-medium">
-            Oops! You don't have any products in your cart.
+            Oops! You don&apos;t have any products in your cart.
           </h1>
         </div>
       ) : (
