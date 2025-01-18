@@ -34,9 +34,11 @@ const Cart = () => {
     queryKey: ["products"],
     queryFn: async () => {
       const res = await axiosSecure.get(`/products/carts?email=${user?.email}`);
-      return res.data;
+      console.log(res.data);
+      return res.data?.allProducts || [];
     },
   });
+  console.log(products);
   const incQuantity = async (_id) => {
     await axiosSecure.put(`/products/cart/${_id}?email=${user?.email}`, {
       quantity: 1,
@@ -57,12 +59,12 @@ const Cart = () => {
     axiosSecure
       .delete(`/products/carts/${_id}?email=${user?.email}`)
       .then(() => {
-        refetch(),
-          toast({
-            title: "Success",
-            description: "Product removed from your cart.",
-            action: <ToastAction altText="Sign up complete.">Ok</ToastAction>,
-          });
+        refetch();
+        toast({
+          title: "Success",
+          description: "Product removed from your cart.",
+          action: <ToastAction altText="Remove complete.">Ok</ToastAction>,
+        });
       })
       .catch((err) =>
         toast({

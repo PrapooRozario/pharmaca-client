@@ -9,6 +9,7 @@ import Shop from "@/pages/Shop";
 import CategoryDetails from "@/pages/CategoryDetails";
 import Cart from "@/pages/Cart";
 import PrivateRoute from "./PrivateRoute";
+import Checkout from "@/pages/Checkout";
 
 const Router = () => {
   return (
@@ -25,6 +26,14 @@ const Router = () => {
           element={
             <PrivateRoute>
               <Cart></Cart>
+            </PrivateRoute>
+          }
+        ></Route>
+        <Route
+          path="/checkout"
+          element={
+            <PrivateRoute>
+              <Checkout></Checkout>
             </PrivateRoute>
           }
         ></Route>
