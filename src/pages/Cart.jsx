@@ -54,7 +54,7 @@ const Cart = () => {
     refetch();
   };
 
-  const handelRemove = (_id) => {
+  const handleRemove = (_id) => {
     axiosSecure
       .delete(`/products/carts/${_id}?email=${user?.email}`)
       .then(() => {
@@ -76,7 +76,7 @@ const Cart = () => {
       );
   };
 
-  const handelRemoveAll = () => {
+  const handleRemoveAll = () => {
     axiosSecure
       .delete(`/products/carts?email=${user?.email}`)
       .then(() => {
@@ -119,7 +119,7 @@ const Cart = () => {
             <div className="flex justify-between mt-6">
               <DialogClose>
                 <Button
-                  onClick={() => handelRemoveAll()}
+                  onClick={() => handleRemoveAll()}
                   className={buttonVariants({ variant: "destructive" })}
                 >
                   Remove All
@@ -206,7 +206,7 @@ const Cart = () => {
                 <div className="flex items-center gap-3 justify-end">
                   {/* Flex container for buttons */}
                   <Button
-                    onClick={() => handelRemove(product?._id)}
+                    onClick={() => handleRemove(product?._id)}
                     className={buttonVariants({ variant: "destructive" })}
                   >
                     Remove

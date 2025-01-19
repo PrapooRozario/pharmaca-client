@@ -156,7 +156,10 @@ const Shop = () => {
                 </div>
               </TableCell>
               <TableCell>{product?.itemName}</TableCell> {/* Product name */}
-              <TableCell>{product?.category}</TableCell>{" "}
+              <TableCell>
+                {product?.category?.charAt(0).toUpperCase() +
+                  product?.category?.slice(1)}
+              </TableCell>{" "}
               {/* Product category */}
               <TableCell>${product?.perUnitPrice}</TableCell>{" "}
               {/* Product price */}
@@ -193,7 +196,9 @@ const Shop = () => {
                           />
                         </div>
                         <div className="text-xs bg-blue-200 w-fit rounded-lg px-2 py-1 mt-2 font-medium">
-                          {product?.category} {/* Product category */}
+                          {product?.category?.charAt(0).toUpperCase() +
+                            product?.category?.slice(1)}
+                          {/* Product category */}
                         </div>
                         <h1 className="text-xl font-medium mt-2">
                           {product?.itemName} {/* Product name */}

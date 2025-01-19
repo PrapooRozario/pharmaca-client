@@ -16,7 +16,7 @@ import {
   Home,
   Users,
 } from "lucide-react";
-import { NavLink } from "react-router";
+import { Link, NavLink } from "react-router";
 
 export default function DashboardNavbar() {
   const items = [
@@ -56,7 +56,9 @@ export default function DashboardNavbar() {
       <SidebarContent>
         <SidebarGroup>
           <SidebarHeader>
-            <img src="/pharmaca.svg" alt="pharmaca" className="w-4/5" />
+            <Link to="/">
+              <img src="/pharmaca.svg" alt="pharmaca" className="w-4/5" />
+            </Link>
           </SidebarHeader>
           <SidebarGroupContent>
             <SidebarMenu className="mt-4">
