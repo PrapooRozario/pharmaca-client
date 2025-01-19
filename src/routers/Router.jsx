@@ -13,6 +13,7 @@ import Checkout from "@/pages/Checkout";
 import Invoice from "@/pages/Invoice";
 import Dashboard from "@/layouts/Dashboard";
 import DashboardHome from "@/pages/DashboardHome";
+import DashboardManageUsers from "@/pages/DashboardManageUsers";
 
 const Router = () => {
   return (
@@ -71,6 +72,10 @@ const Router = () => {
         <Route
           path="/dashboard"
           element={<DashboardHome></DashboardHome>}
+        ></Route>
+        <Route
+          path="/dashboard/manage-users"
+          element={<DashboardManageUsers></DashboardManageUsers>}
         ></Route>
       </Route>
     </Routes>
