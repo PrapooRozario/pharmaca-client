@@ -38,7 +38,6 @@ const Cart = () => {
       return res.data?.allProducts || [];
     },
   });
-  console.log(products);
   const incQuantity = async (_id) => {
     await axiosSecure.put(`/products/cart/${_id}?email=${user?.email}`, {
       quantity: 1,

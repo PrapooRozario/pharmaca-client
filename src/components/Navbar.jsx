@@ -47,7 +47,9 @@ const Navbar = () => {
                   Shop
                 </NavLink>
                 <div className="flex flex-col pt-4 gap-8">
-                  <ShoppingBag className="text-neutral-600 w-6 cursor-pointer" />
+                  <Link to="/products/cart">
+                    <ShoppingBag className="text-neutral-600 w-6 cursor-pointer" />
+                  </Link>
                   <DropdownMenu>
                     {/* Language Toggle */}
                     <DropdownMenuTrigger className="outline-0 cursor-pointer">
@@ -102,7 +104,10 @@ const Navbar = () => {
                           <NavLink className="font-medium hover:text-black text-neutral-600 transition duration-200">
                             Update Profile
                           </NavLink>
-                          <NavLink className="font-medium hover:text-black text-neutral-600 transition duration-200">
+                          <NavLink
+                            to={"/dashboard"}
+                            className="font-medium hover:text-black text-neutral-600 transition duration-200"
+                          >
                             Dashboard
                           </NavLink>
                           <Button
@@ -199,7 +204,10 @@ const Navbar = () => {
                   <NavLink className="font-medium hover:text-black text-neutral-600 transition duration-200">
                     Update Profile
                   </NavLink>
-                  <NavLink className="font-medium hover:text-black text-neutral-600 transition duration-200">
+                  <NavLink
+                    to={"/dashboard"}
+                    className="font-medium hover:text-black text-neutral-600 transition duration-200"
+                  >
                     Dashboard
                   </NavLink>
                   <Button

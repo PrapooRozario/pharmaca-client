@@ -11,6 +11,8 @@ import Cart from "@/pages/Cart";
 import PrivateRoute from "./PrivateRoute";
 import Checkout from "@/pages/Checkout";
 import Invoice from "@/pages/Invoice";
+import Dashboard from "@/layouts/Dashboard";
+import DashboardHome from "@/pages/DashboardHome";
 
 const Router = () => {
   return (
@@ -63,6 +65,12 @@ const Router = () => {
               <Login></Login>
             </AuthPrivateRoute>
           }
+        ></Route>
+      </Route>
+      <Route path="/dashboard" element={<Dashboard></Dashboard>}>
+        <Route
+          path="/dashboard"
+          element={<DashboardHome></DashboardHome>}
         ></Route>
       </Route>
     </Routes>
