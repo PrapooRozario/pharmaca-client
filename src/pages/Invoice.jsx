@@ -8,7 +8,7 @@ import { useLocation } from "react-router";
 const Invoice = () => {
   const { state } = useLocation();
   const handleDownloadPdf = async () => {
-    const element = document.querySelector('#element')
+    const element = document.querySelector("#element");
     const canvas = await html2canvas(element, {
       scale: 2,
       useCORS: true,
@@ -104,7 +104,7 @@ const Invoice = () => {
                       Invoice date:
                     </dt>
                     <dd className="col-span-2 text-gray-500">
-                      {moment.unix(state?.createdAt).format("L")}
+                      {moment(state?.createdAt).format("L")}
                     </dd>
                   </dl>
                 </div>

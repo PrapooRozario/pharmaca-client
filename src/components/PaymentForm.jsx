@@ -6,6 +6,7 @@ import { toast } from "@/hooks/use-toast";
 import { ToastAction } from "./ui/toast";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router";
+import moment from "moment";
 
 const PaymentForm = ({ totalCartPrice, user_email, user_name, products }) => {
   const stripe = useStripe();
@@ -48,7 +49,9 @@ const PaymentForm = ({ totalCartPrice, user_email, user_name, products }) => {
             email: user_email,
             transactionId: paymentResult?.paymentIntent?.id,
             productIds: products?.map((product) => product?.productId),
+            productPrices: products?.map((product) => product?.totalPrice),
             totalAmount: totalCartPrice,
+            createdAt: new Date(),
             status: "pending",
           })
           .then(() => {
@@ -65,7 +68,7 @@ const PaymentForm = ({ totalCartPrice, user_email, user_name, products }) => {
             products: products,
             user_email,
             user_name,
-            createdAt: paymentResult?.paymentIntent?.created,
+            createdAt: new Date(),
           },
         });
       }

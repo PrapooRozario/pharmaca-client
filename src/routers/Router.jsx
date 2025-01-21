@@ -16,6 +16,7 @@ import DashboardHome from "@/pages/DashboardHome";
 import DashboardManageUsers from "@/pages/DashboardManageUsers";
 import DashboardManageCategory from "@/pages/DashboardManageCategory";
 import DashboardPaymentManagement from "@/pages/DashboardPaymentManagement";
+import DashboardSalesReport from "@/pages/DashboardSalesReport";
 
 const Router = () => {
   return (
@@ -86,6 +87,10 @@ const Router = () => {
         <Route
           path="/dashboard/payment-management"
           element={<DashboardPaymentManagement></DashboardPaymentManagement>}
+        ></Route>
+        <Route
+          path="/dashboard/sales-report"
+          element={<DashboardSalesReport></DashboardSalesReport>}
         ></Route>
       </Route>
     </Routes>

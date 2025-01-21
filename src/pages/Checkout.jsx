@@ -16,6 +16,7 @@ const Checkout = () => {
       return res.data?.totalCartPrice;
     },
   });
+
   const { data: products = [] } = useQuery({
     queryKey: ["products"],
     queryFn: async () => {
@@ -23,7 +24,6 @@ const Checkout = () => {
       return res.data?.allProducts;
     },
   });
-
   return (
     <div className="flex md:flex-row flex-col-reverse items-start justify-center my-10">
       <div className="flex-1 md:mt-0 mt-6">

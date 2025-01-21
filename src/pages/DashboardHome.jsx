@@ -8,12 +8,11 @@ const DashboardHome = () => {
   const [axiosSecure] = useAxios();
   const { user } = useAuth();
   const { data: statistics = 0 } = useQuery({
-    queryKey: ["totalOrders"],
+    queryKey: ["statistics"],
     queryFn: async () => {
       const res = await axiosSecure.get(
         `/dashboard/statistics?email=${user?.email}`
       );
-      console.log(res.data);
       return res.data;
     },
   });
