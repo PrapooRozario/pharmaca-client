@@ -17,6 +17,8 @@ import DashboardManageUsers from "@/pages/DashboardManageUsers";
 import DashboardManageCategory from "@/pages/DashboardManageCategory";
 import DashboardPaymentManagement from "@/pages/DashboardPaymentManagement";
 import DashboardSalesReport from "@/pages/DashboardSalesReport";
+import DashboardManageBannerAdvertise from "@/pages/DashboardManageBannerAdvertise";
+import AdminRoute from "./AdminRoute";
 
 const Router = () => {
   return (
@@ -78,19 +80,43 @@ const Router = () => {
         ></Route>
         <Route
           path="/dashboard/manage-users"
-          element={<DashboardManageUsers></DashboardManageUsers>}
+          element={
+            <AdminRoute>
+              <DashboardManageUsers></DashboardManageUsers>
+            </AdminRoute>
+          }
         ></Route>
         <Route
           path="/dashboard/manage-category"
-          element={<DashboardManageCategory></DashboardManageCategory>}
+          element={
+            <AdminRoute>
+              <DashboardManageCategory></DashboardManageCategory>
+            </AdminRoute>
+          }
         ></Route>
         <Route
           path="/dashboard/payment-management"
-          element={<DashboardPaymentManagement></DashboardPaymentManagement>}
+          element={
+            <AdminRoute>
+              <DashboardPaymentManagement></DashboardPaymentManagement>
+            </AdminRoute>
+          }
         ></Route>
         <Route
           path="/dashboard/sales-report"
-          element={<DashboardSalesReport></DashboardSalesReport>}
+          element={
+            <AdminRoute>
+              <DashboardSalesReport></DashboardSalesReport>
+            </AdminRoute>
+          }
+        ></Route>
+        <Route
+          path="/dashboard/manage-banner"
+          element={
+            <AdminRoute>
+              <DashboardManageBannerAdvertise></DashboardManageBannerAdvertise>
+            </AdminRoute>
+          }
         ></Route>
       </Route>
     </Routes>

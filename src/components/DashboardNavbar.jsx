@@ -8,18 +8,39 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
+import useAuth from "@/hooks/useAuth";
+import useAxios from "@/hooks/useAxios";
+import { useQuery } from "@tanstack/react-query";
 import {
   Boxes,
   ChartNoAxesCombined,
   CreditCard,
   GalleryThumbnails,
   Home,
+  Hospital,
   Users,
 } from "lucide-react";
 import { Link, NavLink } from "react-router";
 
 export default function DashboardNavbar() {
-  const items = [
+  const [axiosSecure] = useAxios();
+  const { user } = useAuth();
+  const { data: admin } = useQuery({
+    queryKey: ["admin"],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/admin/${user?.email}`);
+      return res.data;
+    },
+  });
+  const { data: seller } = useQuery({
+    queryKey: ["seller"],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/seller/${user?.email}`);
+      return res.data;
+    },
+  });
+
+  const adminItems = [
     {
       title: "Home",
       url: "/dashboard",
@@ -51,6 +72,38 @@ export default function DashboardNavbar() {
       icon: GalleryThumbnails,
     },
   ];
+
+  const sellerItems = [
+    {
+      title: "Home",
+      url: "/dashboard",
+      icon: Home,
+    },
+    {
+      title: "Manage Medicines",
+      url: "/manage-medicines",
+      icon: Hospital,
+    },
+    {
+      title: "Payment Management",
+      url: "/dashboard/payment-management",
+      icon: CreditCard,
+    },
+    {
+      title: "Ask For Advertisement",
+      url: "/dashboard/advertisement",
+      icon: GalleryThumbnails,
+    },
+  ];
+
+  const userItems = [
+    {
+      title: "Payment History",
+      url: "/dashboard/payment-history",
+      icon: CreditCard,
+    },
+  ];
+
   return (
     <Sidebar>
       <SidebarContent>
@@ -62,7 +115,12 @@ export default function DashboardNavbar() {
           </SidebarHeader>
           <SidebarGroupContent>
             <SidebarMenu className="mt-4">
-              {items.map((item) => (
+              {(admin?.admin
+                ? adminItems
+                : seller?.seller
+                ? sellerItems
+                : userItems
+              ).map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
                     <NavLink to={item.url}>
