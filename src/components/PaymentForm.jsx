@@ -39,8 +39,6 @@ const PaymentForm = ({ totalCartPrice, user_email, user_name, products }) => {
           },
         },
       });
-
-      console.log(paymentResult);
       if (paymentResult.paymentIntent.status === "succeeded") {
         axiosSecure
           .post("/products/payments", {

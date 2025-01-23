@@ -24,60 +24,63 @@ const DashboardPaymentHistory = () => {
   });
   return (
     <div className="p-6">
-      {!payments.length && !isLoading ? (
-        <div className="absolute top-[56%] z-10 right-[20%] left-[20%] flex justify-center items-center">
-          <h1 className="md:text-2xl text-center text-lg font-medium">
-            Oops! We couldn’t find what you’re looking for.
+      {!payments.length && !isLoading && (
+        <div className="fixed inset-0 flex items-center justify-center">
+          <h1 className="text-lg md:text-2xl font-medium text-center">
+            Oops! We couldn't find what you're looking for.
           </h1>
         </div>
-      ) : (
-        ""
       )}
       {isError && (
-        <div className="absolute top-[56%] z-10 right-[20%] left-[20%] flex justify-center items-center">
-          <h1 className="md:text-2xl text-center text-lg font-medium">
+        <div className="fixed inset-0 flex items-center justify-center">
+          <h1 className="text-lg md:text-2xl font-medium text-center">
             Oops! Something went wrong.
           </h1>
         </div>
       )}
       {isLoading && (
-        <div className="h-[calc(100vh-100px)] absolute right-[20%] left-[20%] flex justify-center items-center">
+        <div className="fixed inset-0 flex items-center justify-center">
           <div className="spinner"></div>
         </div>
       )}
-      <Table className="w-full overflow-x-auto min-h-[calc(100vh-500px)]">
-        <TableHeader>
-          <TableRow>
-            <TableHead className="w-[100px]">#</TableHead>
-            <TableHead>Username</TableHead>
-            <TableHead>Email</TableHead>
-            <TableHead>Amount</TableHead>
-            <TableHead>Status</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {payments?.map((payment, idx) => (
-            <TableRow key={payment?._id}>
-              <TableCell className="font-medium">{idx + 1}</TableCell>
-              <TableCell>{payment?.buyer[0]?.username}</TableCell>
-              <TableCell>{payment?.buyer[0]?.email}</TableCell>
-              <TableCell>${payment?.totalAmount}</TableCell>
-              <TableCell>
-                <div
-                  className={
-                    payment?._id === "pending"
-                      ? "text-yellow-600 bg-yellow-100 text-xs rounded-lg w-fit py-1 px-2"
-                      : "text-green-600 bg-green-100 text-xs rounded-lg w-fit py-1 px-2"
-                  }
-                >
-                  {payment?._id?.charAt(0)?.toUpperCase() +
-                    payment?._id?.slice(1)}
-                </div>
-              </TableCell>
+      <div className="w-full overflow-x-auto">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead className="w-[60px]">#</TableHead>
+              <TableHead>Username</TableHead>
+              <TableHead>Email</TableHead>
+              <TableHead>Amount</TableHead>
+              <TableHead>Status</TableHead>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+          </TableHeader>
+          <TableBody>
+            {payments?.map((payment, idx) => (
+              <TableRow key={payment?._id}>
+                <TableCell className="font-medium">{idx + 1}</TableCell>
+                <TableCell className="max-w-[200px] truncate">
+                  {payment?.buyer[0]?.username}
+                </TableCell>
+                <TableCell className="max-w-[200px] truncate">
+                  {payment?.buyer[0]?.email}
+                </TableCell>
+                <TableCell>${payment?.totalAmount}</TableCell>
+                <TableCell>
+                  <span
+                    className={`inline-block px-2 py-1 text-xs rounded-lg ${
+                      payment?._id === "pending"
+                        ? "text-yellow-600 bg-yellow-100"
+                        : "text-green-600 bg-green-100"
+                    }`}
+                  >
+                    {payment?._id?.charAt(0)?.toUpperCase() + payment?._id?.slice(1)}
+                  </span>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
     </div>
   );
 };

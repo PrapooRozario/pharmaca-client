@@ -15,7 +15,6 @@ import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 const Navbar = () => {
   const { user, logout } = useAuth();
   const [language, setLanguage] = useState("Eng");
-  console.log(user);
   return (
     <div>
       <div className="flex items-center justify-between">

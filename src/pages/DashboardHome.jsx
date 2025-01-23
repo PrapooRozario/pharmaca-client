@@ -2,12 +2,12 @@ import useAuth from "@/hooks/useAuth";
 import useAxios from "@/hooks/useAxios";
 import { useQuery } from "@tanstack/react-query";
 import { PiMoneyLight } from "react-icons/pi";
-import { IoCartOutline } from "react-icons/io5";
 import { MdOutlinePending } from "react-icons/md";
+import { useNavigate } from "react-router";
 const DashboardHome = () => {
   const [axiosSecure] = useAxios();
   const { user } = useAuth();
-
+  const navigate = useNavigate();
   const { data: adminStatistics = 0 } = useQuery({
     queryKey: ["adminStatistics"],
     queryFn: async () => {
@@ -17,7 +17,7 @@ const DashboardHome = () => {
       return res.data;
     },
   });
-
+  
   const { data: sellerStatistics = 0 } = useQuery({
     queryKey: ["sellerStatistics"],
     queryFn: async () => {
@@ -27,9 +27,7 @@ const DashboardHome = () => {
       return res.data;
     },
   });
-
-  console.log(sellerStatistics);
-
+    
   const { data: admin } = useQuery({
     queryKey: ["admin"],
     queryFn: async () => {
@@ -37,6 +35,7 @@ const DashboardHome = () => {
       return res.data;
     },
   });
+  
   return (
     <section className="p-6 my-6 dark:bg-gray-100 dark:text-gray-800">
       <div className="container grid grid-cols-1 gap-6 mx-auto sm:grid-cols-2 xl:grid-cols-4">

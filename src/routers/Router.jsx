@@ -149,6 +149,7 @@ const Router = () => {
         ></Route>
         <Route
           path="/dashboard/payment-history/me"
+          index
           element={
             <PrivateRoute>
               <DashboardUserPaymentHistory></DashboardUserPaymentHistory>

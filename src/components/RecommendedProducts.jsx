@@ -1,4 +1,3 @@
-import Slide1 from "@/assets/Slide1.webp";
 import useAxios from "@/hooks/useAxios";
 import { useQuery } from "@tanstack/react-query";
 
@@ -15,7 +14,7 @@ const RecommendedProducts = () => {
     <div className="mb-20">
       <div className="mb-10">
         <h1 className="text-5xl font-semibold text-center">
-          Recommended For You
+          Recommend For You
         </h1>
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">

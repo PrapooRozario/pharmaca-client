@@ -149,7 +149,7 @@ const DashboardManageCategory = () => {
       });
   };
   return (
-    <div>
+    <div className="container mx-auto px-4">
       <div className="my-6">
         <Dialog>
           <DialogTrigger>
@@ -157,15 +157,15 @@ const DashboardManageCategory = () => {
               Add Category
             </Button>
           </DialogTrigger>
-          <DialogContent>
+          <DialogContent className="max-w-md w-full">
             <DialogHeader>
               <DialogTitle>Add Category</DialogTitle>
               <DialogDescription>
                 Add new category here. Click add when you&apos;re done.
               </DialogDescription>
             </DialogHeader>
-            <form onSubmit={handleSubmit(handleAddCategory)}>
-              <label>
+            <form onSubmit={handleSubmit(handleAddCategory)} className="space-y-4">
+              <label className="block">
                 <p className="font-medium text-sm">Category Name</p>
                 <Input
                   {...register("categoryName")}
@@ -173,173 +173,172 @@ const DashboardManageCategory = () => {
                     "mt-2 block w-full rounded-lg",
                     "focus:outline-none data-[focus]:outline-1 placeholder-neutral-400 data-[focus]:-outline-offset-2 data-[focus]:outline-neutral-300"
                   )}
-                ></Input>
-              </label>
-              <p className="font-medium text-sm mt-4">Category Image</p>
-              <label className="block">
-                <span className="sr-only">Choose profile photo</span>
-                <input
-                  {...register("categoryImage")}
-                  type="file"
-                  accept="image/*" // Accept only image files
-                  className="block mt-2 w-full text-sm text-neutral-400
-        file:me-4 file:py-2 file:px-4
-        file:rounded-lg file:border-0
-        file:text-sm file:font-semibold
-        file:bg-[#1E6BFF] file:text-white
-        hover:file:bg-[#1158db]
-        file:cursor-pointer
-        file:disabled:opacity-50 file:disabled:pointer-events-none
-        dark:text-neutral-500
-        dark:file:bg-blue-500
-        dark:hover:file:bg-blue-400"
                 />
               </label>
-              <DialogFooter>
-                <Button
-                  type="submit"
-                  className={buttonVariants({
-                    variant: "primary",
-                  })}
-                >
-                  Add
-                </Button>
-                <DialogClose>
+              <div>
+                <p className="font-medium text-sm">Category Image</p>
+                <label className="block">
+                  <span className="sr-only">Choose profile photo</span>
+                  <input
+                    {...register("categoryImage")}
+                    type="file"
+                    accept="image/*"
+                    className="block mt-2 w-full text-sm text-neutral-400
+                      file:me-4 file:py-2 file:px-4
+                      file:rounded-lg file:border-0
+                      file:text-sm file:font-semibold
+                      file:bg-[#1E6BFF] file:text-white
+                      hover:file:bg-[#1158db]
+                      file:cursor-pointer
+                      file:disabled:opacity-50 file:disabled:pointer-events-none"
+                  />
+                </label>
+              </div>
+              <DialogFooter className="sm:justify-end">
+                <div className="flex gap-2">
                   <Button
+                    type="submit"
                     className={buttonVariants({
-                      variant: "destructive",
+                      variant: "primary",
                     })}
                   >
-                    Cancel
+                    Add
                   </Button>
-                </DialogClose>
+                  <DialogClose>
+                    <Button
+                      className={buttonVariants({
+                        variant: "destructive",
+                      })}
+                    >
+                      Cancel
+                    </Button>
+                  </DialogClose>
+                </div>
               </DialogFooter>
             </form>
           </DialogContent>
         </Dialog>
       </div>
-      <Table className="w-full overflow-x-auto min-h-[calc(100vh-500px)]">
-        <TableHeader>
-          <TableRow>
-            <TableHead className="w-[100px]">#</TableHead>
-            <TableHead>Category Image</TableHead>
-            <TableHead>Category Name</TableHead>
-            <TableHead>Action</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {categories?.map((category, idx) => (
-            <TableRow key={category?._id}>
-              <TableCell className="font-medium">{idx + 1}</TableCell>
-              <TableCell>
-                <div className="bg-blue-100 rounded-xl p-2 w-fit">
-                  <img
-                    src={category?.categoryImage}
-                    alt={`Image of ${category?.categoryName}`}
-                    className="object-cover w-14 h-14 mx-auto"
-                  />
-                </div>
-              </TableCell>
-              <TableCell>
-                {category?.categoryName?.charAt(0).toUpperCase() +
-                  category?.categoryName?.slice(1)}
-              </TableCell>
-              <TableCell>
-                <div className="flex items-center gap-3">
-                  <Dialog>
-                    <DialogTrigger>
-                      <Button
-                        onClick={() => {
-                          setCategoryId(category?._id);
-                          reset();
-                        }}
-                        className={buttonVariants({ variant: "primary" })}
-                      >
-                        Update
-                      </Button>
-                    </DialogTrigger>
-                    <DialogContent>
-                      <DialogHeader>
-                        <DialogTitle>Update Category</DialogTitle>
-                        <DialogDescription>
-                          Make changes to category here. Click update when
-                          you&apos;re done.
-                        </DialogDescription>
-                      </DialogHeader>
-                      <form onSubmit={handleSubmit(handleUpdate)}>
-                        <label>
-                          <p className="font-medium text-sm">Category Name</p>
-                          <Input
-                            defaultValue={
-                              category?.categoryName
-                                ?.toLowerCase()
-                                .charAt(0)
-                                .toUpperCase() +
-                              category?.categoryName?.slice(1)
-                            }
-                            {...register("categoryName")}
-                            className={clsx(
-                              "mt-2 block w-full rounded-lg",
-                              "focus:outline-none data-[focus]:outline-1 placeholder-neutral-400 data-[focus]:-outline-offset-2 data-[focus]:outline-neutral-300"
-                            )}
-                          ></Input>
-                        </label>
-                        <p className="font-medium text-sm mt-4">
-                          Category Image
-                        </p>
-                        <label className="block">
-                          <span className="sr-only">Choose profile photo</span>
-                          <input
-                            {...register("categoryImage")}
-                            type="file"
-                            accept="image/*" // Accept only image files
-                            className="block mt-2 w-full text-sm text-neutral-400
-        file:me-4 file:py-2 file:px-4
-        file:rounded-lg file:border-0
-        file:text-sm file:font-semibold
-        file:bg-[#1E6BFF] file:text-white
-        hover:file:bg-[#1158db]
-        file:cursor-pointer
-        file:disabled:opacity-50 file:disabled:pointer-events-none
-        dark:text-neutral-500
-        dark:file:bg-blue-500
-        dark:hover:file:bg-blue-400"
-                          />
-                        </label>
-                        <DialogFooter>
-                          <Button
-                            type="submit"
-                            className={buttonVariants({
-                              variant: "primary",
-                            })}
-                          >
-                            Update
-                          </Button>
-                          <DialogClose>
-                            <Button
-                              className={buttonVariants({
-                                variant: "destructive",
-                              })}
-                            >
-                              Cancel
-                            </Button>
-                          </DialogClose>
-                        </DialogFooter>
-                      </form>
-                    </DialogContent>
-                  </Dialog>
-                  <Button
-                    onClick={() => handleRemove(category?._id)}
-                    className={buttonVariants({ variant: "destructive" })}
-                  >
-                    Remove
-                  </Button>
-                </div>
-              </TableCell>
+
+      <div className="overflow-x-auto">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead className="w-[80px]">#</TableHead>
+              <TableHead className="w-[120px]">Category Image</TableHead>
+              <TableHead>Category Name</TableHead>
+              <TableHead className="w-[200px]">Action</TableHead>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+          </TableHeader>
+          <TableBody>
+            {categories?.map((category, idx) => (
+              <TableRow key={category?._id}>
+                <TableCell className="font-medium">{idx + 1}</TableCell>
+                <TableCell>
+                  <div className="bg-blue-100 rounded-xl p-2 w-fit">
+                    <img
+                      src={category?.categoryImage}
+                      alt={`Image of ${category?.categoryName}`}
+                      className="object-cover w-14 h-14"
+                    />
+                  </div>
+                </TableCell>
+                <TableCell>
+                  {category?.categoryName?.charAt(0).toUpperCase() +
+                    category?.categoryName?.slice(1)}
+                </TableCell>
+                <TableCell>
+                  <div className="flex flex-wrap gap-2">
+                    <Dialog>
+                      <DialogTrigger>
+                        <Button
+                          onClick={() => {
+                            setCategoryId(category?._id);
+                            reset();
+                          }}
+                          className={buttonVariants({ variant: "primary" })}
+                        >
+                          Update
+                        </Button>
+                      </DialogTrigger>
+                      <DialogContent className="max-w-md w-full">
+                        <DialogHeader>
+                          <DialogTitle>Update Category</DialogTitle>
+                          <DialogDescription>
+                            Make changes to category here. Click update when you&apos;re done.
+                          </DialogDescription>
+                        </DialogHeader>
+                        <form onSubmit={handleSubmit(handleUpdate)} className="space-y-4">
+                          <label className="block">
+                            <p className="font-medium text-sm">Category Name</p>
+                            <Input
+                              defaultValue={
+                                category?.categoryName?.toLowerCase().charAt(0).toUpperCase() +
+                                category?.categoryName?.slice(1)
+                              }
+                              {...register("categoryName")}
+                              className={clsx(
+                                "mt-2 block w-full rounded-lg",
+                                "focus:outline-none data-[focus]:outline-1 placeholder-neutral-400 data-[focus]:-outline-offset-2 data-[focus]:outline-neutral-300"
+                              )}
+                            />
+                          </label>
+                          <div>
+                            <p className="font-medium text-sm">Category Image</p>
+                            <label className="block">
+                              <span className="sr-only">Choose profile photo</span>
+                              <input
+                                {...register("categoryImage")}
+                                type="file"
+                                accept="image/*"
+                                className="block mt-2 w-full text-sm text-neutral-400
+                                  file:me-4 file:py-2 file:px-4
+                                  file:rounded-lg file:border-0
+                                  file:text-sm file:font-semibold
+                                  file:bg-[#1E6BFF] file:text-white
+                                  hover:file:bg-[#1158db]
+                                  file:cursor-pointer
+                                  file:disabled:opacity-50 file:disabled:pointer-events-none"
+                              />
+                            </label>
+                          </div>
+                          <DialogFooter className="sm:justify-end">
+                            <div className="flex gap-2">
+                              <Button
+                                type="submit"
+                                className={buttonVariants({
+                                  variant: "primary",
+                                })}
+                              >
+                                Update
+                              </Button>
+                              <DialogClose>
+                                <Button
+                                  className={buttonVariants({
+                                    variant: "destructive",
+                                  })}
+                                >
+                                  Cancel
+                                </Button>
+                              </DialogClose>
+                            </div>
+                          </DialogFooter>
+                        </form>
+                      </DialogContent>
+                    </Dialog>
+                    <Button
+                      onClick={() => handleRemove(category?._id)}
+                      className={buttonVariants({ variant: "destructive" })}
+                    >
+                      Remove
+                    </Button>
+                  </div>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
     </div>
   );
 };

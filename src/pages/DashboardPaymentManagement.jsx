@@ -46,51 +46,53 @@ const DashboardPaymentManagement = () => {
   };
   return (
     <div className="p-6">
-      <Table className="w-full overflow-x-auto min-h-[calc(100vh-500px)]">
-        <TableHeader>
-          <TableRow>
-            <TableHead className="w-[100px]">#</TableHead>
-            <TableHead>Username</TableHead>
-            <TableHead>Email</TableHead>
-            <TableHead>Amount</TableHead>
-            <TableHead>Status</TableHead>
-            <TableHead>Action</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {payments?.map((payment, idx) => (
-            <TableRow key={payment?._id}>
-              <TableCell className="font-medium">{idx + 1}</TableCell>
-              <TableCell>{payment?.username}</TableCell>
-              <TableCell>{payment?.email}</TableCell>
-              <TableCell>${payment?.totalAmount}</TableCell>
-              <TableCell>
-                <div
-                  className={
-                    payment?.status === "pending"
-                      ? "text-yellow-600 bg-yellow-100 text-xs rounded-lg w-fit py-1 px-2"
-                      : "text-green-600 bg-green-100 text-xs rounded-lg w-fit py-1 px-2"
-                  }
-                >
-                  {payment?.status?.charAt(0)?.toUpperCase() +
-                    payment?.status?.slice(1)}
-                </div>
-              </TableCell>
-              <TableCell>
-                <Button
-                  disabled={payment?.status === "paid"}
-                  onClick={() => handleAcceptPayment(payment?._id)}
-                  className={`${buttonVariants({
-                    variant: "primary",
-                  })} text-xs disabled:cursor-not-allowed`}
-                >
-                  Accept Payment
-                </Button>
-              </TableCell>
+      <div className="w-full">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead className="w-[70px]">#</TableHead>
+              <TableHead>Username</TableHead>
+              <TableHead>Email</TableHead>
+              <TableHead>Amount</TableHead>
+              <TableHead>Status</TableHead>
+              <TableHead className="text-right">Action</TableHead>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+          </TableHeader>
+          <TableBody>
+            {payments?.map((payment, idx) => (
+              <TableRow key={payment?._id}>
+                <TableCell className="font-medium">{idx + 1}</TableCell>
+                <TableCell className="whitespace-nowrap">{payment?.username}</TableCell>
+                <TableCell className="whitespace-nowrap">{payment?.email}</TableCell>
+                <TableCell>${payment?.totalAmount}</TableCell>
+                <TableCell>
+                  <div
+                    className={`inline-flex px-2 py-1 text-xs rounded-lg ${
+                      payment?.status === "pending"
+                        ? "text-yellow-600 bg-yellow-100"
+                        : "text-green-600 bg-green-100"
+                    }`}
+                  >
+                    {payment?.status?.charAt(0)?.toUpperCase() +
+                      payment?.status?.slice(1)}
+                  </div>
+                </TableCell>
+                <TableCell className="text-right">
+                  <Button
+                    disabled={payment?.status === "paid"}
+                    onClick={() => handleAcceptPayment(payment?._id)}
+                    className={`${buttonVariants({
+                      variant: "primary",
+                    })} text-xs disabled:cursor-not-allowed`}
+                  >
+                    Accept Payment
+                  </Button>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
     </div>
   );
 };

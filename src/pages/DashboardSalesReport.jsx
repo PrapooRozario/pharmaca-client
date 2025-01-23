@@ -26,7 +26,11 @@ const DashboardSalesReport = () => {
   const [endDate, setEndDate] = useState("");
 
   const [axiosSecure] = useAxios();
-  const { data: sales = [] , isError, isLoading} = useQuery({
+  const {
+    data: sales = [],
+    isError,
+    isLoading,
+  } = useQuery({
     queryKey: ["sales", startDate, endDate],
     queryFn: async () => {
       const res = await axiosSecure.get(
@@ -58,43 +62,43 @@ const DashboardSalesReport = () => {
   return (
     <div className="py-6">
       {!sales.length && !isLoading ? (
-        <div className="absolute top-[56%] z-10 right-[20%] left-[20%] flex justify-center items-center">
-          <h1 className="md:text-2xl text-center text-lg font-medium">
-            Oops! We couldn’t find what you’re looking for.
+        <div className="fixed inset-0 flex items-center justify-center">
+          <h1 className="text-lg md:text-2xl font-medium text-center px-4">
+            Oops! We couldn't find what you're looking for.
           </h1>
         </div>
-      ) : (
-        ""
-      )}
+      ) : null}
       {isError && (
-        <div className="absolute top-[56%] z-10 right-[20%] left-[20%] flex justify-center items-center">
-          <h1 className="md:text-2xl text-center text-lg font-medium">
+        <div className="fixed inset-0 flex items-center justify-center">
+          <h1 className="text-lg md:text-2xl font-medium text-center px-4">
             Oops! Something went wrong.
           </h1>
         </div>
       )}
       {isLoading && (
-        <div className="h-[calc(100vh-100px)] absolute right-[20%] left-[20%] flex justify-center items-center">
+        <div className="fixed inset-0 flex items-center justify-center">
           <div className="spinner"></div>
         </div>
       )}
-      <div className="mb-6 flex flex-wrap items-center gap-6">
+      <div className="mb-6 flex flex-wrap items-center gap-4 sm:gap-6">
         <Popover>
           <PopoverTrigger>
-            <div className="flex items-center gap-2 border px-4 rounded-xl py-3">
-              <Calendar className="text-neutral-600"></Calendar>
+            <div className="flex items-center gap-2 border px-3 sm:px-4 rounded-xl py-2 sm:py-3">
+              <Calendar className="text-neutral-600 h-4 w-4 sm:h-5 sm:w-5" />
               {startDate || endDate ? (
-                <p className="text-sm text-neutral-600">
+                <p className="text-xs sm:text-sm text-neutral-600">
                   {`${moment(startDate).format("L")} - ${moment(endDate).format(
                     "L"
                   )}`}
                 </p>
               ) : (
-                <p className="text-sm text-neutral-600">Pick a date</p>
+                <p className="text-xs sm:text-sm text-neutral-600">
+                  Pick a date
+                </p>
               )}
             </div>
           </PopoverTrigger>
-          <PopoverContent>
+          <PopoverContent className="w-auto">
             <DateRangePicker
               ranges={[selectionRange]}
               onChange={handleSelect}
@@ -103,14 +107,15 @@ const DashboardSalesReport = () => {
         </Popover>
         <CSVLink data={csvData}>
           <Button className={buttonVariants({ variant: "primary" })}>
-            <Download></Download> Export CSV
+            <Download name="Sales Report" className="h-4 w-4 mr-2" /> Export CSV
           </Button>
         </CSVLink>
       </div>
-      <Table className="w-full overflow-x-auto min-h-[calc(100vh-500px)]">
+      <div className="w-full overflow-x-auto"></div>
+      <Table className="min-w-full min-h-[calc(100vh-500px)]">
         <TableHeader>
           <TableRow>
-            <TableHead className="text-left">#</TableHead>
+            <TableHead className="w-16">#</TableHead>
             <TableHead>Medicine Name</TableHead>
             <TableHead>Seller Email</TableHead>
             <TableHead>Buyer Email</TableHead>
@@ -121,26 +126,26 @@ const DashboardSalesReport = () => {
         <TableBody>
           {sales?.map((sale, idx) => (
             <TableRow key={sale?._id}>
-              <TableCell>{idx + 1}</TableCell>
+              <TableCell className="w-16">{idx + 1}</TableCell>
               <TableCell className="font-medium">
                 {sale?.product?.itemName}
               </TableCell>
-              <TableCell>{ sale?.product?.email}</TableCell>
+              <TableCell>{sale?.product?.email}</TableCell>
               <TableCell>{sale?.email}</TableCell>
               <TableCell className="text-right">
                 ${sale?.productPrice}
               </TableCell>
-              <TableCell className="flex justify-end">
-                <div
-                  className={
+              <TableCell className="text-right">
+                <span
+                  className={`inline-block px-2 py-1 text-xs rounded-lg ${
                     sale?.status === "pending"
-                      ? "text-yellow-600 bg-yellow-100 text-xs rounded-lg w-fit py-1 px-2"
-                      : "text-green-600 bg-green-100 text-xs rounded-lg w-fit py-1 px-2"
-                  }
+                      ? "text-yellow-600 bg-yellow-100"
+                      : "text-green-600 bg-green-100"
+                  }`}
                 >
                   {sale?.status?.charAt(0)?.toUpperCase() +
                     sale?.status?.slice(1)}
-                </div>
+                </span>
               </TableCell>
             </TableRow>
           ))}

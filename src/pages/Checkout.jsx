@@ -23,6 +23,7 @@ const Checkout = () => {
       return res.data?.allProducts;
     },
   });
+  console.log(products)
   return (
     <div className="flex md:flex-row flex-col-reverse items-start justify-center my-10">
       <div className="flex-1 md:mt-0 mt-6">

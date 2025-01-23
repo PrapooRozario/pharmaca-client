@@ -27,7 +27,6 @@ const DashboardManageUsers = () => {
     queryKey: ["users"],
     queryFn: async () => {
       const res = await axiosSecure.get(`/users?email=${user?.email}`);
-      console.log(res.data);
       return res.data;
     },
   });
@@ -57,25 +56,25 @@ const DashboardManageUsers = () => {
       });
   };
   return (
-    <div>
-      <Table className="w-full overflow-x-auto min-h-[calc(100vh-500px)]">
+    <div className="w-full">
+      <Table>
         <TableHeader>
           <TableRow>
-            <TableHead className="w-[100px]">#</TableHead>
-            <TableHead>Username</TableHead>
-            <TableHead>Email</TableHead>
-            <TableHead>Role</TableHead>
+            <TableHead className="w-[60px]">#</TableHead>
+            <TableHead className="min-w-[150px]">Username</TableHead>
+            <TableHead className="min-w-[200px]">Email</TableHead>
+            <TableHead className="min-w-[150px]">Role</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {users?.map((user, idx) => (
             <TableRow key={user?._id}>
-              <TableCell className="font-medium">{idx + 1}</TableCell>
-              <TableCell>{user?.username}</TableCell>
-              <TableCell>{user?.email}</TableCell>
+              <TableCell className="font-medium text-center">{idx + 1}</TableCell>
+              <TableCell className="break-words">{user?.username}</TableCell>
+              <TableCell className="break-words">{user?.email}</TableCell>
               <TableCell>
                 <Select onValueChange={(e) => handleChangeRole(e, user?.email)}>
-                  <SelectTrigger className="w-[180px]">
+                  <SelectTrigger className="w-full max-w-[180px]">
                     <SelectValue
                       placeholder={
                         user?.role?.charAt(0).toUpperCase() +

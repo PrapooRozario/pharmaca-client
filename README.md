@@ -1,8 +1,40 @@
-# React + Vite
+# Pharmaca - Multi-Vendor E-Commerce Platform for Medicines and Healthcare Products
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Live Site URL
+[Pharmaca](https://pharmaca-e18bf.web.app)
 
-Currently, two official plugins are available:
+## Seller Credentials
+- **Enail:** seller@gmail.com
+- **Password:** Seller@2025
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
+- **User  Authentication:** Secure login and registration for customers and vendors.
+- **Vendor Management:** Vendors can create profiles and manage their products.
+- **Product Catalog:** Browse a wide range of medicines and healthcare products.
+- **Shopping Cart:** Add products to the cart and proceed to checkout.
+- **Order Management:** View order history and track order status.
+- **Payment Integration:** Secure payments through Stripe or PayPal.
+- **Responsive Design:** Optimized for both desktop and mobile devices.
+- **Admin Dashboard:** Manage users, vendors, products, and orders from a single interface.
+
+## Technologies Used
+- **Frontend:**
+  - [React.js](https://reactjs.org/)
+  - [Axios](https://axios-http.com/)
+  - [React Router](https://reactrouter.com/)
+  - [Tailwindcss](https://tailwindcss.com/)
+  - [Tanstack Query](https://tanstack.com/)
+
+- **Backend:**
+  - [Node.js](https://nodejs.org/)
+  - [Express.js](https://expressjs.com/) 
+  - 
+- **Database:**
+  - [MongoDB](https://www.mongodb.com/)
+
+- **Authentication:**
+  - [Firebase](https://firebase.google.com/)
+  - [JSON Web Tokens (JWT)](https://jwt.io/)
+
+- **Payment Processing:**
+  - [Stripe](https://stripe.com/)

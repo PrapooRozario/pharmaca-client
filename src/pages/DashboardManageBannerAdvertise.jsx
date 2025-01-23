@@ -46,44 +46,46 @@ const DashboardManageBannerAdvertise = () => {
   };
 
   return (
-    <div className="p-6">
-      <Table className="w-full overflow-x-auto min-h-[calc(100vh-500px)]">
+    <div>
+      <Table>
         <TableHeader>
           <TableRow>
-            <TableHead className="text-left">Banner Image</TableHead>
-            <TableHead className="text-left">Banner Name</TableHead>
-            <TableHead className="text-left">Description</TableHead>
+            <TableHead className="w-24">Banner Image</TableHead>
+            <TableHead>Banner Name</TableHead>
+            <TableHead>Description</TableHead>
             <TableHead className="text-right">Seller Email</TableHead>
-            <TableHead className="text-center">Action</TableHead>
+            <TableHead className="text-center w-32">Action</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {banners.map((banner) => (
             <TableRow key={banner?._id}>
-              <TableCell className="font-medium text-left">
+              <TableCell>
                 <div className="rounded-xl p-2">
                   <img
                     src={banner?.bannerImage}
                     alt={banner?.bannerName}
-                    className="object-cover w-14 h-14 mx-auto"
+                    className="w-14 h-14 object-cover"
                   />
                 </div>
               </TableCell>
-              <TableCell className="text-left max-w-[160px] truncate">
-                {banner?.bannerName}
+              <TableCell className="max-w-[200px]">
+                <div className="truncate">{banner?.bannerName}</div>
               </TableCell>
-              <TableCell className="text-left truncate max-w-[160px]">
-                {banner?.description}
+              <TableCell className="max-w-[300px]">
+                <div className="truncate">{banner?.description}</div>
               </TableCell>
-              <TableCell className="text-right">{banner?.email}</TableCell>
+              <TableCell className="text-right">
+                <div className="truncate">{banner?.email}</div>
+              </TableCell>
               <TableCell className="text-center">
                 <Button
                   onClick={() => handleAddBanner(banner?._id)}
-                  className={
+                  className={`whitespace-nowrap ${
                     banner?.status === "inactive"
                       ? buttonVariants({ variant: "primary" })
                       : buttonVariants({ variant: "destructive" })
-                  }
+                  }`}
                 >
                   {banner?.status === "active" ? "Remove" : "Add"} In Slider
                 </Button>

@@ -119,7 +119,7 @@ const DashboardManageMedicines = () => {
                 Add Medicine
               </DialogTitle>
               <DialogDescription>
-                Add new medicine to your shop here. Click add when you&apos;re done.
+                Add new medicine to your shop here. Click add when you're done.
               </DialogDescription>
             </DialogHeader>
             <form

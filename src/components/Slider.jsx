@@ -15,7 +15,6 @@ const Slider = () => {
       return res.data;
     },
   });
-  console.log(banners)
   return (
     <div className="flex items-center justify-center bg-gray-100 mt-10">
       <Swiper
