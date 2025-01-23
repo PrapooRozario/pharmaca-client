@@ -18,6 +18,7 @@ import useAuth from "@/hooks/useAuth";
 import { toast } from "@/hooks/use-toast";
 import { ToastAction } from "@/components/ui/toast";
 import { useNavigate } from "react-router";
+import { Helmet } from "react-helmet";
 
 const Shop = () => {
   const [axiosSecure] = useAxios(); // Custom hook for secure axios instance
@@ -86,6 +87,9 @@ const Shop = () => {
   };
   return (
     <div className="my-10 px-4 md:px-6 lg:px-8">
+      <Helmet>
+        <title> Pharmaca | Shop</title>
+      </Helmet>
       {!products.length && !isLoading ? (
         <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 w-full max-w-md">
           <h1 className="text-lg md:text-2xl text-center font-medium">

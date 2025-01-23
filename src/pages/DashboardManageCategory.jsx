@@ -28,6 +28,7 @@ import clsx from "clsx";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import axios from "axios";
+import { Helmet } from "react-helmet";
 const DashboardManageCategory = () => {
   const [axiosSecure] = useAxios();
   const { register, handleSubmit, reset } = useForm();
@@ -150,6 +151,9 @@ const DashboardManageCategory = () => {
   };
   return (
     <div className="container mx-auto px-4">
+      <Helmet>
+        <title> Pharmaca | Manage Category</title>
+      </Helmet>
       <div className="my-6">
         <Dialog>
           <DialogTrigger>
@@ -164,7 +168,10 @@ const DashboardManageCategory = () => {
                 Add new category here. Click add when you&apos;re done.
               </DialogDescription>
             </DialogHeader>
-            <form onSubmit={handleSubmit(handleAddCategory)} className="space-y-4">
+            <form
+              onSubmit={handleSubmit(handleAddCategory)}
+              className="space-y-4"
+            >
               <label className="block">
                 <p className="font-medium text-sm">Category Name</p>
                 <Input
@@ -265,15 +272,22 @@ const DashboardManageCategory = () => {
                         <DialogHeader>
                           <DialogTitle>Update Category</DialogTitle>
                           <DialogDescription>
-                            Make changes to category here. Click update when you&apos;re done.
+                            Make changes to category here. Click update when
+                            you&apos;re done.
                           </DialogDescription>
                         </DialogHeader>
-                        <form onSubmit={handleSubmit(handleUpdate)} className="space-y-4">
+                        <form
+                          onSubmit={handleSubmit(handleUpdate)}
+                          className="space-y-4"
+                        >
                           <label className="block">
                             <p className="font-medium text-sm">Category Name</p>
                             <Input
                               defaultValue={
-                                category?.categoryName?.toLowerCase().charAt(0).toUpperCase() +
+                                category?.categoryName
+                                  ?.toLowerCase()
+                                  .charAt(0)
+                                  .toUpperCase() +
                                 category?.categoryName?.slice(1)
                               }
                               {...register("categoryName")}
@@ -284,9 +298,13 @@ const DashboardManageCategory = () => {
                             />
                           </label>
                           <div>
-                            <p className="font-medium text-sm">Category Image</p>
+                            <p className="font-medium text-sm">
+                              Category Image
+                            </p>
                             <label className="block">
-                              <span className="sr-only">Choose profile photo</span>
+                              <span className="sr-only">
+                                Choose profile photo
+                              </span>
                               <input
                                 {...register("categoryImage")}
                                 type="file"

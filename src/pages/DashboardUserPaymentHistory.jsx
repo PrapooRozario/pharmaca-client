@@ -3,6 +3,7 @@ import useAuth from "@/hooks/useAuth";
 import useAxios from "@/hooks/useAxios";
 import { useQuery } from "@tanstack/react-query";
 import moment from "moment";
+import { Helmet } from "react-helmet";
 
 const DashboardUserPaymentHistory = () => {
     const { user } = useAuth();
@@ -22,6 +23,9 @@ const DashboardUserPaymentHistory = () => {
     });
     return (
       <div className="p-6 w-full overflow-x-auto">
+        <Helmet>
+          <title> Pharmaca | Payment History</title>
+        </Helmet>
         {!payments.length && !isLoading ? (
           <div className="fixed inset-0 flex justify-center items-center">
             <h1 className="text-lg md:text-2xl font-medium text-center px-4">
@@ -56,8 +60,12 @@ const DashboardUserPaymentHistory = () => {
               {payments?.map((payment, idx) => (
                 <TableRow key={payment?._id}>
                   <TableCell className="font-medium">{idx + 1}</TableCell>
-                  <TableCell>{moment(payment?.createdAt).format("L")}</TableCell>
-                  <TableCell className="break-all">{payment?.transactionId}</TableCell>
+                  <TableCell>
+                    {moment(payment?.createdAt).format("L")}
+                  </TableCell>
+                  <TableCell className="break-all">
+                    {payment?.transactionId}
+                  </TableCell>
                   <TableCell>${payment?.totalAmount}</TableCell>
                   <TableCell>
                     <div

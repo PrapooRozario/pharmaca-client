@@ -15,6 +15,7 @@ import useAxios from "@/hooks/useAxios";
 import { useQuery } from "@tanstack/react-query";
 import { Eye } from "lucide-react";
 import { useState } from "react";
+import { Helmet } from "react-helmet";
 import { useNavigate, useParams } from "react-router";
 
 const CategoryDetails = () => {
@@ -67,6 +68,9 @@ const CategoryDetails = () => {
   };
   return (
     <div className="my-10 px-2 md:px-6 lg:px-8">
+      <Helmet>
+        <title>Pharmaca | Category</title>
+      </Helmet>
       {!products?.length && !isLoading ? (
         <div className="fixed inset-0 flex items-center justify-center">
           <h1 className="text-lg md:text-2xl font-medium text-center px-4">
@@ -113,22 +117,33 @@ const CategoryDetails = () => {
                 </TableCell>
                 <TableCell className="text-sm">{product?.itemName}</TableCell>
                 <TableCell className="hidden md:table-cell text-sm">
-                  {product?.category?.charAt(0).toUpperCase() + product?.category?.slice(1)}
+                  {product?.category?.charAt(0).toUpperCase() +
+                    product?.category?.slice(1)}
                 </TableCell>
-                <TableCell className="text-sm">${product?.perUnitPrice}</TableCell>
+                <TableCell className="text-sm">
+                  ${product?.perUnitPrice}
+                </TableCell>
                 <TableCell>
                   <div className="flex items-center gap-2 justify-end">
                     <Button
                       onClick={() => handleSelect(product?._id)}
-                      className={buttonVariants({ variant: "primary", size: "sm" })}
+                      className={buttonVariants({
+                        variant: "primary",
+                        size: "sm",
+                      })}
                     >
                       Select
                     </Button>
                     <Dialog>
                       <DialogTrigger asChild>
                         <Button
-                          onClick={() => setDiscount(product?.discountPercentage)}
-                          className={buttonVariants({ variant: "primary", size: "sm" })}
+                          onClick={() =>
+                            setDiscount(product?.discountPercentage)
+                          }
+                          className={buttonVariants({
+                            variant: "primary",
+                            size: "sm",
+                          })}
                         >
                           <Eye className="w-4 h-4" />
                         </Button>
@@ -144,10 +159,15 @@ const CategoryDetails = () => {
                           </div>
                           <div className="space-y-2">
                             <div className="text-xs bg-blue-200 w-fit rounded-lg px-2 py-1 font-medium">
-                              {product?.category?.charAt(0).toUpperCase() + product?.category?.slice(1)}
+                              {product?.category?.charAt(0).toUpperCase() +
+                                product?.category?.slice(1)}
                             </div>
-                            <h1 className="text-xl font-medium">{product?.itemName}</h1>
-                            <p className="text-sm text-neutral-600">{product?.shortDescription}</p>
+                            <h1 className="text-xl font-medium">
+                              {product?.itemName}
+                            </h1>
+                            <p className="text-sm text-neutral-600">
+                              {product?.shortDescription}
+                            </p>
                             {product?.discountPercentage > 0 && (
                               <div className="text-sm bg-green-100 w-fit rounded-lg px-4 py-2 font-medium">
                                 {product?.discountPercentage}% OFF
@@ -161,9 +181,13 @@ const CategoryDetails = () => {
                                 </span>
                               </h1>
                               <h1 className="text-2xl font-semibold text-[#1E6BFF]">
-                                ${product?.discountPercentage === 0
+                                $
+                                {product?.discountPercentage === 0
                                   ? product?.perUnitPrice
-                                  : (product?.perUnitPrice - (product?.perUnitPrice * discount) / 100).toFixed(2)}
+                                  : (
+                                      product?.perUnitPrice -
+                                      (product?.perUnitPrice * discount) / 100
+                                    ).toFixed(2)}
                                 <span className="text-xs text-neutral-500 font-normal ml-2">
                                   Per Unit
                                 </span>

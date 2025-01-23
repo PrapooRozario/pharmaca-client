@@ -4,6 +4,7 @@ import useAxios from "@/hooks/useAxios";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { useQuery } from "@tanstack/react-query";
+import { Helmet } from "react-helmet";
 const stripePromise = loadStripe(import.meta.env.VITE_PAYMENT_PUBLISHABLE_KEY);
 const Checkout = () => {
   const { user } = useAuth();
@@ -26,6 +27,9 @@ const Checkout = () => {
   console.log(products)
   return (
     <div className="flex md:flex-row flex-col-reverse items-start justify-center my-10">
+      <Helmet>
+        <title> Pharmaca | Checkout</title>
+      </Helmet>
       <div className="flex-1 md:mt-0 mt-6">
         <h1 className="text-3xl font-semibold mb-6">
           {products?.length} Products

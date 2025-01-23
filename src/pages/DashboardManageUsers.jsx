@@ -19,6 +19,7 @@ import useAxios from "@/hooks/useAxios";
 import { useQuery } from "@tanstack/react-query";
 import { toast } from "@/hooks/use-toast";
 import { ToastAction } from "@/components/ui/toast";
+import { Helmet } from "react-helmet";
 
 const DashboardManageUsers = () => {
   const [axiosSecure] = useAxios();
@@ -57,6 +58,9 @@ const DashboardManageUsers = () => {
   };
   return (
     <div className="w-full">
+      <Helmet>
+        <title> Pharmaca | Manage Users</title>
+      </Helmet>
       <Table>
         <TableHeader>
           <TableRow>
@@ -69,7 +73,9 @@ const DashboardManageUsers = () => {
         <TableBody>
           {users?.map((user, idx) => (
             <TableRow key={user?._id}>
-              <TableCell className="font-medium text-center">{idx + 1}</TableCell>
+              <TableCell className="font-medium text-center">
+                {idx + 1}
+              </TableCell>
               <TableCell className="break-words">{user?.username}</TableCell>
               <TableCell className="break-words">{user?.email}</TableCell>
               <TableCell>

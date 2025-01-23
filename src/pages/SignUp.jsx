@@ -8,6 +8,7 @@ import axios from "axios";
 import clsx from "clsx";
 import { ArrowLeft } from "lucide-react";
 import { useState } from "react";
+import { Helmet } from "react-helmet";
 import { useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
 import { Link, useLocation, useNavigate } from "react-router";
@@ -58,6 +59,9 @@ const SignUp = () => {
   };
   return (
     <div>
+      <Helmet>
+        <title> Pharmaca | Sign Up</title>
+      </Helmet>
       {/* Back Button */}
       <Button
         className={`${buttonVariants({ variant: "primary" })} fixed top-6 `}

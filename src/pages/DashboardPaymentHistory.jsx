@@ -9,6 +9,7 @@ import {
 import useAuth from "@/hooks/useAuth";
 import useAxios from "@/hooks/useAxios";
 import { useQuery } from "@tanstack/react-query";
+import { Helmet } from "react-helmet";
 
 const DashboardPaymentHistory = () => {
   const { user } = useAuth();
@@ -24,6 +25,9 @@ const DashboardPaymentHistory = () => {
   });
   return (
     <div className="p-6">
+      <Helmet>
+        <title> Pharmaca | Payment History</title>
+      </Helmet>
       {!payments.length && !isLoading && (
         <div className="fixed inset-0 flex items-center justify-center">
           <h1 className="text-lg md:text-2xl font-medium text-center">
@@ -73,7 +77,8 @@ const DashboardPaymentHistory = () => {
                         : "text-green-600 bg-green-100"
                     }`}
                   >
-                    {payment?._id?.charAt(0)?.toUpperCase() + payment?._id?.slice(1)}
+                    {payment?._id?.charAt(0)?.toUpperCase() +
+                      payment?._id?.slice(1)}
                   </span>
                 </TableCell>
               </TableRow>

@@ -12,11 +12,16 @@ import { useState } from "react";
 import { Button, buttonVariants } from "./ui/button";
 import useAuth from "@/hooks/useAuth";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { Helmet } from "react-helmet";
 const Navbar = () => {
   const { user, logout } = useAuth();
   const [language, setLanguage] = useState("Eng");
   return (
     <div>
+      <Helmet>
+        <title> Pharmaca | Home</title>
+      </Helmet>
+
       <div className="flex items-center justify-between">
         {/* Brand Logo */}
         <div>

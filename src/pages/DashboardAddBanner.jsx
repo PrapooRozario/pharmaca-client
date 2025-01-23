@@ -27,6 +27,7 @@ import { useState } from "react";
 import useAuth from "@/hooks/useAuth";
 import { ToastAction } from "@/components/ui/toast";
 import { toast } from "@/hooks/use-toast";
+import { Helmet } from "react-helmet";
 const DashboardAddBanner = () => {
   const [axiosSecure] = useAxios();
   const { user } = useAuth();
@@ -85,6 +86,9 @@ const DashboardAddBanner = () => {
   };
   return (
     <div className="p-4 md:p-6">
+      <Helmet>
+        <title> Pharmaca | Avertisement</title>
+      </Helmet>
       <div className="mb-6">
         <Dialog>
           <DialogTrigger>
@@ -102,7 +106,10 @@ const DashboardAddBanner = () => {
                 done.
               </DialogDescription>
             </DialogHeader>
-            <form onSubmit={handleSubmit(handleAddBanner)} className="space-y-4">
+            <form
+              onSubmit={handleSubmit(handleAddBanner)}
+              className="space-y-4"
+            >
               <div>
                 <label className="block">
                   <p className="font-medium text-sm mb-2">Banner Name</p>

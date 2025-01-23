@@ -35,6 +35,7 @@ import { useState } from "react";
 import axios from "axios";
 import { toast } from "@/hooks/use-toast";
 import { ToastAction } from "@/components/ui/toast";
+import { Helmet } from "react-helmet";
 const DashboardManageMedicines = () => {
   const [axiosSecure] = useAxios();
   const { user } = useAuth();
@@ -106,6 +107,9 @@ const DashboardManageMedicines = () => {
 
   return (
     <div className="my-6">
+      <Helmet>
+        <title> Pharmaca | Manage Medicine</title>
+      </Helmet>
       <div className="mb-6">
         <Dialog>
           <DialogTrigger>

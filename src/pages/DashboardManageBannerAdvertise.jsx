@@ -11,6 +11,7 @@ import { ToastAction } from "@/components/ui/toast";
 import { toast } from "@/hooks/use-toast";
 import useAxios from "@/hooks/useAxios";
 import { useQuery } from "@tanstack/react-query";
+import { Helmet } from "react-helmet";
 
 const DashboardManageBannerAdvertise = () => {
   const [axiosSecure] = useAxios();
@@ -47,6 +48,9 @@ const DashboardManageBannerAdvertise = () => {
 
   return (
     <div>
+      <Helmet>
+        <title> Pharmaca | Advertisement</title>
+      </Helmet>
       <Table>
         <TableHeader>
           <TableRow>

@@ -6,6 +6,7 @@ import { Field, Input } from "@headlessui/react";
 import { Label } from "@radix-ui/react-dropdown-menu";
 import clsx from "clsx";
 import { ArrowLeft } from "lucide-react";
+import { Helmet } from "react-helmet";
 import { useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
 import { Link, useNavigate } from "react-router";
@@ -36,6 +37,9 @@ const Login = () => {
   };
   return (
     <div>
+      <Helmet>
+        <title> Pharmaca | Login</title>
+      </Helmet>
       <div>
         {/* Back Button */}
         <Button

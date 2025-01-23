@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { PiMoneyLight } from "react-icons/pi";
 import { MdOutlinePending } from "react-icons/md";
 import { useNavigate } from "react-router";
+import { Helmet } from "react-helmet";
 const DashboardHome = () => {
   const [axiosSecure] = useAxios();
   const { user } = useAuth();
@@ -38,6 +39,9 @@ const DashboardHome = () => {
   
   return (
     <section className="p-6 my-6 dark:bg-gray-100 dark:text-gray-800">
+      <Helmet>
+        <title> Pharmaca | Dashboard</title>
+      </Helmet>
       <div className="container grid grid-cols-1 gap-6 mx-auto sm:grid-cols-2 xl:grid-cols-4">
         <div className="flex p-4 space-x-4 rounded-lg md:space-x-6 dark:bg-gray-50 bg-yellow-100 dark:text-gray-800">
           <div className="flex justify-center p-2 align-middle rounded-lg sm:p-4 dark:bg-violet-600">

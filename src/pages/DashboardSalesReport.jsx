@@ -21,6 +21,7 @@ import { Calendar, Download } from "lucide-react";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { CSVLink } from "react-csv";
 import moment from "moment";
+import { Helmet } from "react-helmet";
 const DashboardSalesReport = () => {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
@@ -61,6 +62,9 @@ const DashboardSalesReport = () => {
 
   return (
     <div className="py-6">
+      <Helmet>
+        <title> Pharmaca | Sales Report</title>
+      </Helmet>
       {!sales.length && !isLoading ? (
         <div className="fixed inset-0 flex items-center justify-center">
           <h1 className="text-lg md:text-2xl font-medium text-center px-4">

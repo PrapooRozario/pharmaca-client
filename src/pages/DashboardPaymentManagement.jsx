@@ -11,6 +11,7 @@ import { ToastAction } from "@/components/ui/toast";
 import { toast } from "@/hooks/use-toast";
 import useAxios from "@/hooks/useAxios";
 import { useQuery } from "@tanstack/react-query";
+import { Helmet } from "react-helmet";
 
 const DashboardPaymentManagement = () => {
   const [axiosSecure] = useAxios();
@@ -46,6 +47,9 @@ const DashboardPaymentManagement = () => {
   };
   return (
     <div className="p-6">
+      <Helmet>
+        <title> Pharmaca | Payment Management</title>
+      </Helmet>
       <div className="w-full">
         <Table>
           <TableHeader>
@@ -62,8 +66,12 @@ const DashboardPaymentManagement = () => {
             {payments?.map((payment, idx) => (
               <TableRow key={payment?._id}>
                 <TableCell className="font-medium">{idx + 1}</TableCell>
-                <TableCell className="whitespace-nowrap">{payment?.username}</TableCell>
-                <TableCell className="whitespace-nowrap">{payment?.email}</TableCell>
+                <TableCell className="whitespace-nowrap">
+                  {payment?.username}
+                </TableCell>
+                <TableCell className="whitespace-nowrap">
+                  {payment?.email}
+                </TableCell>
                 <TableCell>${payment?.totalAmount}</TableCell>
                 <TableCell>
                   <div
