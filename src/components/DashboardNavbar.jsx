@@ -85,8 +85,8 @@ export default function DashboardNavbar() {
       icon: Hospital,
     },
     {
-      title: "Payment Management",
-      url: "/dashboard/payment-management",
+      title: "Payment History",
+      url: "/dashboard/payment-history",
       icon: CreditCard,
     },
     {

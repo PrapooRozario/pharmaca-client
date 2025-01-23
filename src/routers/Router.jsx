@@ -20,6 +20,8 @@ import DashboardSalesReport from "@/pages/DashboardSalesReport";
 import DashboardManageBannerAdvertise from "@/pages/DashboardManageBannerAdvertise";
 import AdminRoute from "./AdminRoute";
 import DashboardManageMedicines from "@/pages/DashboardManageMedicines";
+import SellerRoute from "./SellerRoute";
+import DashboardPaymentHistory from "@/pages/DashboardPaymentHistory";
 
 const Router = () => {
   return (
@@ -121,7 +123,19 @@ const Router = () => {
         ></Route>
         <Route
           path="/dashboard/manage-medicines"
-          element={<DashboardManageMedicines></DashboardManageMedicines>}
+          element={
+            <SellerRoute>
+              <DashboardManageMedicines></DashboardManageMedicines>
+            </SellerRoute>
+          }
+        ></Route>
+        <Route
+          path="/dashboard/payment-history"
+          element={
+            <SellerRoute>
+              <DashboardPaymentHistory></DashboardPaymentHistory>
+            </SellerRoute>
+          }
         ></Route>
       </Route>
     </Routes>

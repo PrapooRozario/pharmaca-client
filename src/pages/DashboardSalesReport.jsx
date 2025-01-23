@@ -125,7 +125,7 @@ const DashboardSalesReport = () => {
               <TableCell className="font-medium">
                 {sale?.product?.itemName}
               </TableCell>
-              <TableCell>Paid</TableCell>
+              <TableCell>{ sale?.product?.email}</TableCell>
               <TableCell>{sale?.email}</TableCell>
               <TableCell className="text-right">
                 ${sale?.productPrice}
