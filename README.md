@@ -4,16 +4,16 @@
 [Pharmaca](https://pharmaca-e18bf.web.app)
 
 ## Seller Credentials
-- **Enail:** seller@gmail.com
+- **Email:** seller@gmail.com
 - **Password:** Seller@2025
 
 ## Features
-- **User  Authentication:** Secure login and registration for customers and vendors.
-- **Vendor Management:** Vendors can create profiles and manage their products.
+- **User Authentication:** Secure login and registration for customers and sellers.
+- **Seller Management:** sellers can create profiles and manage their products.
 - **Product Catalog:** Browse a wide range of medicines and healthcare products.
 - **Shopping Cart:** Add products to the cart and proceed to checkout.
 - **Order Management:** View order history and track order status.
-- **Payment Integration:** Secure payments through Stripe or PayPal.
+- **Payment Integration:** Secure payments through Stripe.
 - **Responsive Design:** Optimized for both desktop and mobile devices.
 - **Admin Dashboard:** Manage users, vendors, products, and orders from a single interface.
 
