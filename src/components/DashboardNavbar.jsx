@@ -81,7 +81,7 @@ export default function DashboardNavbar() {
     },
     {
       title: "Manage Medicines",
-      url: "/manage-medicines",
+      url: "/dashboard/manage-medicines",
       icon: Hospital,
     },
     {

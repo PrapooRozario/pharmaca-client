@@ -23,7 +23,7 @@ const DashboardManageBannerAdvertise = () => {
 
   return (
     <div className="p-6">
-      <Table>
+      <Table className="w-full overflow-x-auto min-h-[calc(100vh-500px)]">
         <TableHeader>
           <TableRow>
             <TableHead className="text-left">Banner Image</TableHead>
@@ -46,7 +46,9 @@ const DashboardManageBannerAdvertise = () => {
                 </div>
               </TableCell>
               <TableCell className="text-left">{banner?.bannerName}</TableCell>
-              <TableCell className="text-left w-[150px]">{banner?.description}</TableCell>
+              <TableCell className="text-left w-[150px]">
+                {banner?.description}
+              </TableCell>
               <TableCell className="text-right">{banner?.email}</TableCell>
               <TableCell className="text-center">
                 <Button className={buttonVariants({ variant: "primary" })}>

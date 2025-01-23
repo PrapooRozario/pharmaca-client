@@ -55,7 +55,8 @@ const DiscountProducts = () => {
                 </div>
                 <div className="p-4 ">
                   <p className="text-neutral-600 text-sm mb-2">
-                    {product?.category}
+                    {product?.category?.charAt(0).toUpperCase() +
+                      product?.category?.slice(1)}
                   </p>
                   <h1 className="text-xl font-medium mb-4">
                     {product?.itemName}

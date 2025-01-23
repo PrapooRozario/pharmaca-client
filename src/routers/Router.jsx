@@ -19,6 +19,7 @@ import DashboardPaymentManagement from "@/pages/DashboardPaymentManagement";
 import DashboardSalesReport from "@/pages/DashboardSalesReport";
 import DashboardManageBannerAdvertise from "@/pages/DashboardManageBannerAdvertise";
 import AdminRoute from "./AdminRoute";
+import DashboardManageMedicines from "@/pages/DashboardManageMedicines";
 
 const Router = () => {
   return (
@@ -117,6 +118,10 @@ const Router = () => {
               <DashboardManageBannerAdvertise></DashboardManageBannerAdvertise>
             </AdminRoute>
           }
+        ></Route>
+        <Route
+          path="/dashboard/manage-medicines"
+          element={<DashboardManageMedicines></DashboardManageMedicines>}
         ></Route>
       </Route>
     </Routes>

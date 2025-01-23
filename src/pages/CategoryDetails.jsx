@@ -90,7 +90,7 @@ const CategoryDetails = () => {
           <div className="spinner"></div>
         </div>
       )}
-      <Table className="w-full overflow-x-auto min-h-[calc(100vh-300px)]">
+      <Table className="w-full overflow-x-auto min-h-[calc(100vh-500px)]">
         <TableHeader>
           <TableRow>
             <TableHead>#</TableHead>
@@ -106,10 +106,10 @@ const CategoryDetails = () => {
             <TableRow key={product?._id}>
               <TableCell>{index + 1}</TableCell>
               <TableCell className="font-medium">
-                <div className="bg-blue-100 rounded-xl p-2">
+                <div className="rounded-xl p-2">
                   <img
-                    src={Slide1}
-                    alt="Slide1"
+                    src={product?.itemImage}
+                    alt={product?.itemName}
                     className="object-cover w-14 h-14 mx-auto"
                   />
                 </div>

@@ -46,7 +46,7 @@ const DashboardPaymentManagement = () => {
   };
   return (
     <div className="p-6">
-      <Table>
+      <Table className="w-full overflow-x-auto min-h-[calc(100vh-500px)]">
         <TableHeader>
           <TableRow>
             <TableHead className="w-[100px]">#</TableHead>
@@ -72,7 +72,8 @@ const DashboardPaymentManagement = () => {
                       : "text-green-600 bg-green-100 text-xs rounded-lg w-fit py-1 px-2"
                   }
                 >
-                  {(payment?.status)?.charAt(0)?.toUpperCase()+(payment?.status)?.slice(1)}
+                  {payment?.status?.charAt(0)?.toUpperCase() +
+                    payment?.status?.slice(1)}
                 </div>
               </TableCell>
               <TableCell>

@@ -1,7 +1,6 @@
 import PaymentForm from "@/components/PaymentForm";
 import useAuth from "@/hooks/useAuth";
 import useAxios from "@/hooks/useAxios";
-import Slide1 from "@/assets/Slide1.webp";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { useQuery } from "@tanstack/react-query";
@@ -38,8 +37,8 @@ const Checkout = () => {
             >
               <div className="w-1/4 shrink-0">
                 <img
-                  src={Slide1}
-                  alt="Product"
+                  src={product?.itemImage}
+                  alt={product?.itemName}
                   className="object-cover w-full h-full rounded-lg"
                 />
               </div>

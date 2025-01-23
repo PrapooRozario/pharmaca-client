@@ -110,6 +110,7 @@ const Shop = () => {
       )}
       <div className="mb-6 md:flex items-center justify-between">
         <Button
+          disabled={!products?.length}
           onClick={() => {
             if (sort === "") {
               setSort("desc");
@@ -131,7 +132,7 @@ const Shop = () => {
           <Search className="absolute top-[9px] w-5 mx-2 text-neutral-600"></Search>
         </div>
       </div>
-      <Table className="w-full overflow-x-auto min-h-[calc(100vh-300px)]">
+      <Table className="w-full overflow-x-auto min-h-[calc(100vh-300px)">
         <TableHeader>
           <TableRow>
             <TableHead>#</TableHead>
@@ -147,10 +148,10 @@ const Shop = () => {
             <TableRow key={product?._id}>
               <TableCell>{currentPage * itemsPerPage + index + 1}</TableCell>
               <TableCell className="font-medium">
-                <div className="bg-blue-100 rounded-xl p-2">
+                <div className="rounded-xl p-2">
                   <img
-                    src={Slide1}
-                    alt="Slide1"
+                    src={product?.itemImage}
+                    alt={product?.itemName}
                     className="object-cover w-14 h-14 mx-auto"
                   />
                 </div>
@@ -188,10 +189,10 @@ const Shop = () => {
                       {" "}
                       {/* Dialog content */}
                       <div>
-                        <div className="bg-blue-100 w-full rounded-xl">
+                        <div className="w-full rounded-xl">
                           <img
-                            src={Slide1}
-                            alt="Slide1"
+                            src={product?.itemImage}
+                            alt={product?.itemName}
                             className="object-cover w-[200px] mx-auto" // Responsive image in modal
                           />
                         </div>
@@ -247,37 +248,39 @@ const Shop = () => {
           ))}
         </TableBody>
       </Table>
-      <div className="flex flex-wrap items-center gap-2 text-sm justify-center mt-6">
-        {/* Previous Button */}
-        <button
-          onClick={() => currentPage > 0 && setCurrentPage(currentPage - 1)}
-          disabled={currentPage === 0}
-          className="bg-[#1158dbe7] px-4 py-2 disabled:cursor-not-allowed disabled:bg-neutral-400 text-white rounded-xl font-medium cursor-pointer"
-        >
-          Previous
-        </button>
-
-        {/* Page Number Buttons */}
-        {Array.from({ length: totalPages || 1 }).map((_, index) => (
-          <div
-            key={index}
-            className={`bg-[#1158dbe7] px-4 py-2 text-white rounded-xl font-medium cursor-pointer ${
-              currentPage === index && "bg-neutral-600"
-            }`}
+      {products.length > 0 && (
+        <div className="flex flex-wrap  items-center gap-2 text-sm justify-center mt-6">
+          {/* Previous Button */}
+          <button
+            onClick={() => currentPage > 0 && setCurrentPage(currentPage - 1)}
+            disabled={currentPage === 0}
+            className="bg-[#1158dbe7] px-4 py-2 disabled:cursor-not-allowed disabled:bg-neutral-400 text-white rounded-xl font-medium cursor-pointer"
           >
-            {index + 1}
-          </div>
-        ))}
+            Previous
+          </button>
 
-        {/* Next Button */}
-        <button
-          onClick={() => setCurrentPage(currentPage + 1)}
-          disabled={currentPage === totalPages - 1}
-          className="bg-[#1158dbe7] px-4 py-2 disabled:bg-neutral-400 disabled:cursor-not-allowed text-white rounded-xl font-medium cursor-pointer"
-        >
-          Next
-        </button>
-      </div>
+          {/* Page Number Buttons */}
+          {Array.from({ length: totalPages || 1 }).map((_, index) => (
+            <div
+              key={index}
+              className={`bg-[#1158dbe7] px-4 py-2 text-white rounded-xl font-medium cursor-pointer ${
+                currentPage === index && "bg-neutral-600"
+              }`}
+            >
+              {index + 1}
+            </div>
+          ))}
+
+          {/* Next Button */}
+          <button
+            onClick={() => setCurrentPage(currentPage + 1)}
+            disabled={currentPage === totalPages - 1}
+            className="bg-[#1158dbe7] px-4 py-2 disabled:bg-neutral-400 disabled:cursor-not-allowed text-white rounded-xl font-medium cursor-pointer"
+          >
+            Next
+          </button>
+        </div>
+      )}
     </div>
   );
 };

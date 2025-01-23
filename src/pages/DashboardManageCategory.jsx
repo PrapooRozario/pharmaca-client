@@ -218,7 +218,7 @@ const DashboardManageCategory = () => {
           </DialogContent>
         </Dialog>
       </div>
-      <Table>
+      <Table className="w-full overflow-x-auto min-h-[calc(100vh-500px)]">
         <TableHeader>
           <TableRow>
             <TableHead className="w-[100px]">#</TableHead>

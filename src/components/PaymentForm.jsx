@@ -6,7 +6,6 @@ import { toast } from "@/hooks/use-toast";
 import { ToastAction } from "./ui/toast";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router";
-import moment from "moment";
 
 const PaymentForm = ({ totalCartPrice, user_email, user_name, products }) => {
   const stripe = useStripe();

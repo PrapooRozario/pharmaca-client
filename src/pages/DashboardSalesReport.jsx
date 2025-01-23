@@ -107,7 +107,7 @@ const DashboardSalesReport = () => {
           </Button>
         </CSVLink>
       </div>
-      <Table>
+      <Table className="w-full overflow-x-auto min-h-[calc(100vh-500px)]">
         <TableHeader>
           <TableRow>
             <TableHead className="text-left">#</TableHead>
