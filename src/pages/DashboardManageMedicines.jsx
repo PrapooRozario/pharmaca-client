@@ -102,9 +102,7 @@ const DashboardManageMedicines = () => {
           action: <ToastAction altText="Error">Ok</ToastAction>,
         });
       });
-      console.log(category, company);
     };
-    console.log(products);
 
   return (
     <div className="my-6">
@@ -121,7 +119,7 @@ const DashboardManageMedicines = () => {
                 Add Medicine
               </DialogTitle>
               <DialogDescription>
-                Add new medicine to your shop here. Click add when you're done.
+                Add new medicine to your shop here. Click add when you&apos;re done.
               </DialogDescription>
             </DialogHeader>
             <form

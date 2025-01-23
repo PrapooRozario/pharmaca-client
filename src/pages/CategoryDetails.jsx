@@ -1,6 +1,5 @@
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import Slide1 from "@/assets/Slide1.webp";
 import {
   Table,
   TableBody,
@@ -147,10 +146,10 @@ const CategoryDetails = () => {
                       {" "}
                       {/* Dialog content */}
                       <div>
-                        <div className="bg-blue-100 w-full rounded-xl">
+                        <div className="w-full rounded-xl">
                           <img
-                            src={Slide1}
-                            alt="Slide1"
+                            src={product?.itemImage}
+                            alt={product?.itemName}
                             className="object-cover w-[200px] mx-auto" // Responsive image in modal
                           />
                         </div>

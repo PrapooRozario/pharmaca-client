@@ -22,6 +22,8 @@ import AdminRoute from "./AdminRoute";
 import DashboardManageMedicines from "@/pages/DashboardManageMedicines";
 import SellerRoute from "./SellerRoute";
 import DashboardPaymentHistory from "@/pages/DashboardPaymentHistory";
+import DashboardAddBanner from "@/pages/DashboardAddBanner";
+import DashboardUserPaymentHistory from "@/pages/DashboardUserPaymentHistory";
 
 const Router = () => {
   return (
@@ -135,6 +137,22 @@ const Router = () => {
             <SellerRoute>
               <DashboardPaymentHistory></DashboardPaymentHistory>
             </SellerRoute>
+          }
+        ></Route>
+        <Route
+          path="/dashboard/advertisement"
+          element={
+            <SellerRoute>
+              <DashboardAddBanner></DashboardAddBanner>
+            </SellerRoute>
+          }
+        ></Route>
+        <Route
+          path="/dashboard/payment-history/me"
+          element={
+            <PrivateRoute>
+              <DashboardUserPaymentHistory></DashboardUserPaymentHistory>
+            </PrivateRoute>
           }
         ></Route>
       </Route>

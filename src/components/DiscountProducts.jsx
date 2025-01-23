@@ -2,7 +2,6 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/pagination";
-import Slide1 from "@/assets/Slide1.webp";
 import { FreeMode } from "swiper/modules";
 import useAxios from "@/hooks/useAxios";
 import { useQuery } from "@tanstack/react-query";
@@ -48,9 +47,9 @@ const DiscountProducts = () => {
               <div className="bg-white">
                 <div className="relative">
                   <img
-                    src={Slide1}
-                    alt="Slide1"
-                    className="w-full h-full object-cover"
+                    src={product?.itemImage}
+                    alt={product?.itemName}
+                    className="w-44 h-44 object-cover"
                   />
                 </div>
                 <div className="p-4 ">

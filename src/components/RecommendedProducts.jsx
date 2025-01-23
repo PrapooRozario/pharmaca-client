@@ -22,10 +22,10 @@ const RecommendedProducts = () => {
         {products?.map((product) => (
           <div
             key={product?._id}
-            className="flex items-center bg-[#FEF5EC] w-full rounded-xl p-4"
+            className="flex items-center gap-4 bg-[#FEF5EC] w-full rounded-xl p-4"
           >
             <div className="w-1/4 shrink-0">
-              <img src={Slide1} alt="Slide1" className="object-cover" />
+              <img src={product?.itemImage} alt={product?.itemName} className="object-cover" />
             </div>
             <div className="flex-1">
               <h1 className="md:text-2xl sm:text-xl font-medium mb-3">

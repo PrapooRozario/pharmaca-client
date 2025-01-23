@@ -99,7 +99,7 @@ export default function DashboardNavbar() {
   const userItems = [
     {
       title: "Payment History",
-      url: "/dashboard/payment-history",
+      url: "/dashboard/payment-history/me",
       icon: CreditCard,
     },
   ];
