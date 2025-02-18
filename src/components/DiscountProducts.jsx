@@ -16,7 +16,7 @@ const DiscountProducts = () => {
     },
   });
   return (
-    <div className="container mx-auto px-4 mb-20">
+    <div className="container mx-auto mb-20">
       <div className="mb-10">
         <h1 className="text-5xl font-semibold text-center">
           Special Discounts

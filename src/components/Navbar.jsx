@@ -17,7 +17,7 @@ const Navbar = () => {
   const { user, logout } = useAuth();
   const [language, setLanguage] = useState("Eng");
   return (
-    <div>
+    <div className="sticky top-0 z-50 bg-white py-4">
       <Helmet>
         <title> Pharmaca | Home</title>
       </Helmet>
@@ -97,7 +97,10 @@ const Navbar = () => {
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
                         <Avatar className="cursor-pointer">
-                          <AvatarImage src={user?.photoURL} alt="@shadcn" />
+                          <AvatarImage
+                            src={user?.photoURL}
+                            alt={user?.displayName}
+                          />
                           <AvatarFallback>
                             {user?.displayName?.charAt(0).toUpperCase()}
                           </AvatarFallback>
@@ -140,18 +143,21 @@ const Navbar = () => {
           </DropdownMenu>
         </div>
         {/* Navbar Tablet/Pc */}
-        <ul className="md:flex items-center gap-8 *:text-neutral-600 *:font-medium *:text-lg hidden">
-          <NavLink to="/" className="hover:text-black transition duration-150">
-            Home
-          </NavLink>
-          <NavLink
-            to="/shop"
-            className="hover:text-black transition duration-150"
-          >
-            Shop
-          </NavLink>
-        </ul>
         <div className="md:flex items-center gap-8 hidden">
+          <ul className="md:flex items-center gap-8 *:text-neutral-600 *:font-medium *:text-lg hidden">
+            <NavLink
+              to="/"
+              className="hover:text-black transition duration-150"
+            >
+              Home
+            </NavLink>
+            <NavLink
+              to="/shop"
+              className="hover:text-black transition duration-150"
+            >
+              Shop
+            </NavLink>
+          </ul>
           <Link to="/products/cart">
             <ShoppingBag className="text-neutral-600 w-6 cursor-pointer" />
           </Link>
@@ -192,7 +198,6 @@ const Navbar = () => {
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
-          {/* {Button} */}
           {user && user?.email ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
