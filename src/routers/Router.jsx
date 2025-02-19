@@ -24,12 +24,17 @@ import SellerRoute from "./SellerRoute";
 import DashboardPaymentHistory from "@/pages/DashboardPaymentHistory";
 import DashboardAddBanner from "@/pages/DashboardAddBanner";
 import DashboardUserPaymentHistory from "@/pages/DashboardUserPaymentHistory";
+import ErrorPage from "@/pages/ErrorPage";
 
 const Router = () => {
   return (
     <Routes>
+      <Route path="*" element={<ErrorPage></ErrorPage>}></Route>
       <Route path="/" element={<Main></Main>}>
-        <Route index element={<Home></Home>}></Route>
+        <Route
+          index
+          element={<Home></Home>}
+        ></Route>
         <Route path="/shop" element={<Shop></Shop>}></Route>
         <Route
           path="/category/:category"
