@@ -108,7 +108,10 @@ const Navbar = () => {
                       </DropdownMenuTrigger>
                       <DropdownMenuContent className="w-56 md:hidden p-4">
                         <ul className="flex flex-col space-y-3">
-                          <NavLink className="font-medium hover:text-black text-neutral-600 transition duration-200">
+                          <NavLink
+                            to="/profile/me"
+                            className="font-medium hover:text-black text-neutral-600 transition duration-200"
+                          >
                             Update Profile
                           </NavLink>
                           <NavLink
@@ -210,7 +213,10 @@ const Navbar = () => {
               </DropdownMenuTrigger>
               <DropdownMenuContent className="w-56 hidden md:block p-4">
                 <ul className="flex flex-col space-y-3">
-                  <NavLink className="font-medium hover:text-black text-neutral-600 transition duration-200">
+                  <NavLink
+                    to="/profile/me"
+                    className="font-medium hover:text-black text-neutral-600 transition duration-200"
+                  >
                     Update Profile
                   </NavLink>
                   <NavLink

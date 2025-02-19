@@ -18,7 +18,7 @@ const FAQ = () => {
               <AccordionContent className="text-lg text-neutral-800">
                 Some over-the-counter (OTC) medicines can be purchased without a
                 prescription. However, prescription-only medicines (Rx) require
-                a valid doctor's prescription for purchase.
+                a valid doctor&apos;s prescription for purchase.
               </AccordionContent>
             </AccordionItem>
           </Accordion>

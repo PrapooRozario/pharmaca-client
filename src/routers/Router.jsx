@@ -25,6 +25,7 @@ import DashboardPaymentHistory from "@/pages/DashboardPaymentHistory";
 import DashboardAddBanner from "@/pages/DashboardAddBanner";
 import DashboardUserPaymentHistory from "@/pages/DashboardUserPaymentHistory";
 import ErrorPage from "@/pages/ErrorPage";
+import ProfilePage from "@/pages/ProfilePage";
 
 const Router = () => {
   return (
@@ -61,6 +62,14 @@ const Router = () => {
           element={
             <PrivateRoute>
               <Invoice></Invoice>
+            </PrivateRoute>
+          }
+        ></Route>
+        <Route
+          path="/profile/me"
+          element={
+            <PrivateRoute>
+              <ProfilePage></ProfilePage>
             </PrivateRoute>
           }
         ></Route>
