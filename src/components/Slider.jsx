@@ -16,7 +16,7 @@ const Slider = () => {
     },
   });
   return (
-    <div className="flex items-center justify-center bg-gray-100 mt-10">
+    <div className="flex items-center justify-center mt-10">
       <Swiper
         spaceBetween={30}
         slidesPerView={1}

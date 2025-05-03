@@ -143,8 +143,8 @@ const DashboardSalesReport = () => {
                 <span
                   className={`inline-block px-2 py-1 text-xs rounded-lg ${
                     sale?.status === "pending"
-                      ? "text-yellow-600 bg-yellow-100"
-                      : "text-green-600 bg-green-100"
+                      ? "text-yellow-600 dark:text-yellow-700 bg-yellow-100"
+                      : "text-green-600 dark:text-green-700 bg-green-100"
                   }`}
                 >
                   {sale?.status?.charAt(0)?.toUpperCase() +

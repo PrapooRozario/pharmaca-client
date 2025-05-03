@@ -8,6 +8,7 @@ import { Field, Input, Label } from "@headlessui/react";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import clsx from "clsx";
+import { Loader2 } from "lucide-react";
 import { useState } from "react";
 import { Helmet } from "react-helmet";
 import { useForm } from "react-hook-form";
@@ -71,12 +72,12 @@ const UpdateProfile = () => {
   };
 
   return (
-    <div className="my-10">
+    <div className="my-10 min-h-screen">
       <Helmet>
         <title>Pharmaca | Update Profile</title>
       </Helmet>
       <div>
-        <h1 className="text-4xl mb-10 font-semibold text-center">
+        <h1 className="text-4xl mb-10 font-semibold text-center dark:text-white">
           Update Your Profile
         </h1>
       </div>
@@ -87,30 +88,37 @@ const UpdateProfile = () => {
         >
           <div className="flex justify-center mb-6">
             <Avatar className="cursor-pointer w-20 h-20">
-              <AvatarImage src={user?.photoURL} alt={user?.displayName} />
-              <AvatarFallback>
+              <AvatarImage
+                src={user?.photoURL}
+                alt={user?.displayName}
+                className="dark:border dark:border-neutral-700"
+              />
+              <AvatarFallback className="dark:bg-neutral-800 dark:text-white">
                 {user?.displayName?.charAt(0).toUpperCase()}
               </AvatarFallback>
             </Avatar>
           </div>
 
           <Field>
-            <Label className="font-medium">Photo</Label>
+            <Label className="font-medium dark:text-neutral-200">Photo</Label>
             <input
               type="file"
               accept="image/*"
               {...register("photo")}
-              className="block mt-2 w-full text-sm text-neutral-400
-                                file:me-4 file:py-2 file:px-4
-                                file:rounded-lg file:border-0
-                                file:text-sm file:font-semibold
-                                file:bg-[#1E6BFF] file:text-white
-                                hover:file:bg-[#1158db]"
+              className="block mt-2 w-full text-sm text-neutral-400 dark:text-neutral-500
+          file:me-4 file:py-2 file:px-4
+          file:rounded-lg file:border-0
+          file:text-sm file:font-semibold
+          file:bg-[#1E6BFF] dark:file:bg-blue-600 file:text-white
+          hover:file:bg-[#1158db] dark:hover:file:bg-blue-700
+          dark:file:hover:bg-blue-700"
             />
           </Field>
 
           <Field>
-            <Label className="font-medium">Username</Label>
+            <Label className="font-medium dark:text-neutral-200">
+              Username
+            </Label>
             <Input
               {...register("username", {
                 required: "Username is required",
@@ -118,45 +126,57 @@ const UpdateProfile = () => {
                 maxLength: { value: 30, message: "Maximum 30 characters" },
               })}
               className={clsx(
-                "mt-2 block w-full rounded-lg border-none bg-neutral-200 py-3 px-4",
-                { "outline-red-500": formState.errors.username }
+                "mt-2 block w-full rounded-lg border-none bg-neutral-200 dark:bg-neutral-800 dark:text-white py-3 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-600",
+                {
+                  "outline-red-500 dark:outline-red-400":
+                    formState.errors.username,
+                }
               )}
             />
             {formState.errors.username && (
-              <p className="text-sm text-red-500 mt-1">
+              <p className="text-sm text-red-500 dark:text-red-400 mt-1">
                 {formState.errors.username.message}
               </p>
             )}
           </Field>
 
           <Field>
-            <Label className="font-medium">Email</Label>
+            <Label className="font-medium dark:text-neutral-200">Email</Label>
             <Input
               {...register("email")}
               disabled
-              className="mt-2 block w-full rounded-lg border-none bg-neutral-200 py-3 px-4 opacity-60"
+              className="mt-2 block w-full rounded-lg border-none bg-neutral-200 dark:bg-neutral-800 dark:text-neutral-400 py-3 px-4 opacity-60 cursor-not-allowed"
             />
           </Field>
 
           <Field>
-            <Label className="font-medium">Role</Label>
+            <Label className="font-medium dark:text-neutral-200">Role</Label>
             <Input
               {...register("role")}
               disabled
               value={
-                dbUser?.role?.charAt(0).toUpperCase() + dbUser?.role.slice(1) ||
-                "N/A"
+                dbUser?.role?.charAt(0).toUpperCase() +
+                  dbUser?.role?.slice(1) || "N/A"
               }
-              className="mt-2 block w-full rounded-lg border-none bg-neutral-200 py-3 px-4 opacity-60"
+              className="mt-2 block w-full rounded-lg border-none bg-neutral-200 dark:bg-neutral-800 dark:text-neutral-400 py-3 px-4 opacity-60 cursor-not-allowed"
             />
           </Field>
 
           <Button
             type="submit"
-            className={buttonVariants({ variant: "primary" })}
+            className={`${buttonVariants({
+              variant: "primary",
+            })} dark:bg-blue-600 dark:hover:bg-blue-700 w-full`}
             disabled={loading}
           >
-            {loading ? "Updating..." : "Update Profile"}
+            {loading ? (
+              <span className="flex items-center justify-center gap-2">
+                <Loader2 className="h-4 w-4 animate-spin" />
+                Updating...
+              </span>
+            ) : (
+              "Update Profile"
+            )}
           </Button>
         </form>
       </div>

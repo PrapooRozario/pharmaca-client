@@ -71,8 +71,8 @@ const DashboardUserPaymentHistory = () => {
                     <div
                       className={`text-xs rounded-lg w-fit py-1 px-2 ${
                         payment?.status === "pending"
-                          ? "text-yellow-600 bg-yellow-100"
-                          : "text-green-600 bg-green-100"
+                          ? "text-yellow-600 dark:text-yellow-700 bg-yellow-100"
+                          : "text-green-600 dark:text-green-700 bg-green-100"
                       }`}
                     >
                       {payment?.status?.charAt(0)?.toUpperCase() +

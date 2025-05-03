@@ -16,9 +16,9 @@ const DiscountProducts = () => {
     },
   });
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto py-10">
       <div className="mb-10 px-4 sm:px-6 lg:px-8">
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-center">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-center dark:text-white">
           Special Discounts
         </h1>
       </div>
@@ -45,32 +45,37 @@ const DiscountProducts = () => {
         >
           {products?.map((product) => (
             <SwiperSlide key={product?._id}>
-              <div className="bg-white">
+              <div className="bg-white dark:bg-neutral-900/50 rounded-xl overflow-hidden">
                 <div className="relative">
                   <img
                     src={product?.itemImage}
                     alt={product?.itemName}
-                    className="w-44 h-44 object-cover"
+                    className="w-full h-44 object-cover"
                   />
                 </div>
-                <div className="p-4 ">
-                  <p className="text-neutral-600 text-sm mb-2">
+                <div className="p-4">
+                  <p className="text-neutral-600 dark:text-gray-400 text-sm mb-2">
                     {product?.category?.charAt(0).toUpperCase() +
                       product?.category?.slice(1)}
                   </p>
-                  <h1 className="text-xl font-medium mb-4">
+                  <h1 className="text-xl font-medium mb-4 dark:text-white">
                     {product?.itemName}
                   </h1>
-                  <span className="text-2xl font-bold text-[#1E6BFF]">
-                    $
-                    {(
-                      product?.perUnitPrice -
-                      (product?.perUnitPrice * product?.discountPercentage) /
-                        100
-                    ).toFixed(2)}
-                    <span className="text-neutral-400 text-base font-medium ml-2">
-                      -{product?.discountPercentage}%
+                  <div className="flex items-center justify-between">
+                    <span className="text-2xl font-bold text-[#1E6BFF] dark:text-blue-400">
+                      $
+                      {(
+                        product?.perUnitPrice -
+                        (product?.perUnitPrice * product?.discountPercentage) /
+                          100
+                      ).toFixed(2)}
                     </span>
+                    <span className="text-neutral-400 dark:text-gray-500 text-base font-medium ml-2 line-through">
+                      ${product?.perUnitPrice.toFixed(2)}
+                    </span>
+                  </div>
+                  <span className="inline-block mt-2 px-3 py-1 bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 text-xs font-semibold rounded">
+                    -{product?.discountPercentage}% OFF
                   </span>
                 </div>
               </div>

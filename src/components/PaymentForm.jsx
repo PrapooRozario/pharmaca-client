@@ -86,7 +86,7 @@ const PaymentForm = ({ totalCartPrice, user_email, user_name, products }) => {
     <div className="p-4">
       <form
         onSubmit={handleSubmit}
-        className="space-y-4 bg-slate-200 mx-auto p-8 rounded-xl"
+        className="space-y-4 bg-slate-200 dark:bg-neutral-900/50 mx-auto p-8 rounded-xl"
       >
         <CardElement
           options={{
