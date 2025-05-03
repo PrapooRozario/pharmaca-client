@@ -36,8 +36,6 @@ const DashboardHome = () => {
     },
   });
 
-  console.log(adminStatistics);
-
   return (
     <section className="p-6 my-6  dark:text-gray-100 text-gray-800">
       <Helmet>
