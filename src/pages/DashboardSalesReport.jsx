@@ -27,6 +27,7 @@ const DashboardSalesReport = () => {
   const [endDate, setEndDate] = useState("");
 
   const [axiosSecure] = useAxios();
+  console.log(startDate)
   const {
     data: sales = [],
     isError,
@@ -40,6 +41,7 @@ const DashboardSalesReport = () => {
       return res.data;
     },
   });
+  console.log(sales);
 
   const csvData = sales.map((sale) => ({
     "Medicine Name": sale?.product?.itemName || "",
@@ -59,6 +61,7 @@ const DashboardSalesReport = () => {
     setStartDate(date?.selection?.startDate);
     setEndDate(date?.selection?.endDate);
   };
+
 
   return (
     <div className="py-6">

@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { PiMoneyLight } from "react-icons/pi";
 import { MdOutlinePending } from "react-icons/md";
 import { Helmet } from "react-helmet";
+import PiCharts from "@/components/ui/PiChart";
 const DashboardHome = () => {
   const [axiosSecure] = useAxios();
   const { user } = useAuth();
@@ -34,6 +35,8 @@ const DashboardHome = () => {
       return res.data;
     },
   });
+
+  console.log(adminStatistics);
 
   return (
     <section className="p-6 my-6  dark:text-gray-100 text-gray-800">
@@ -69,6 +72,11 @@ const DashboardHome = () => {
             <p className="capitalize">Paid</p>
           </div>
         </div>
+      </div>
+      <div className="mt-6">
+        <PiCharts
+          data={admin?.admin ? adminStatistics : sellerStatistics}
+        ></PiCharts>
       </div>
     </section>
   );
