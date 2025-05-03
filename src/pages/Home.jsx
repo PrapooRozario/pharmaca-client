@@ -7,7 +7,7 @@ import Slider from "@/components/Slider";
 
 const Home = () => {
   return (
-    <div>
+    <div className="lg:space-y-32 md:space-y-24 sm:space-y-20 space-y-16">
       <Slider></Slider>
       <Category></Category>
       <RecentProducts></RecentProducts>

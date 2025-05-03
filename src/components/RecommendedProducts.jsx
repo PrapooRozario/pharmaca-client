@@ -11,12 +11,13 @@ const RecommendedProducts = () => {
     },
   });
   return (
-    <div className="mb-20">
-      <div className="mb-10">
-        <h1 className="text-5xl font-semibold text-center">
+    <div>
+      <div className="mb-10 px-4 sm:px-6 lg:px-8">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-center">
           Recommend For You
         </h1>
       </div>
+
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {products?.map((product) => (
           <div
@@ -24,7 +25,11 @@ const RecommendedProducts = () => {
             className="flex items-center gap-4 bg-[#FEF5EC] w-full rounded-xl p-4"
           >
             <div className="w-1/4 shrink-0">
-              <img src={product?.itemImage} alt={product?.itemName} className="object-cover" />
+              <img
+                src={product?.itemImage}
+                alt={product?.itemName}
+                className="object-cover"
+              />
             </div>
             <div className="flex-1">
               <h1 className="md:text-2xl sm:text-xl font-medium mb-3">

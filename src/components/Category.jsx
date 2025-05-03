@@ -1,4 +1,3 @@
-import Prescription from "@/assets/Prescription.png";
 import useAxios from "@/hooks/useAxios";
 import { useQuery } from "@tanstack/react-query";
 import { NavLink } from "react-router";
@@ -12,7 +11,7 @@ const Category = () => {
     },
   });
   return (
-    <div className="my-20 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 gap-6">
+    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 gap-6">
       {categories?.map((category) => (
         <NavLink
           key={category?._id}

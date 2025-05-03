@@ -12,10 +12,13 @@ const RecentProducts = () => {
     },
   });
   return (
-    <div className="mb-20">
-      <div className="mb-10">
-        <h1 className="text-5xl font-semibold text-center">Recent Products</h1>
+    <div>
+      <div className="mb-10 px-4 sm:px-6 lg:px-8">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-center">
+          Recent Products
+        </h1>
       </div>
+
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {products?.slice(0, 6)?.map((product) => (
           <div
