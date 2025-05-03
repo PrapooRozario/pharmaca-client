@@ -100,19 +100,19 @@ VITE_IMAGE_UPLOAD_KEY="your-imgbb-api-key"
 ### 📜 Available Scripts
 
 ```bash
-In the /pharmaca-client directory, you can run:
+# In the /pharmaca-client directory, you can run:
 
 npm run dev
-Runs the development server using Vite.
+# Runs the development server using Vite.
 
 npm run build
-Builds the app for production.
+# Builds the app for production.
 
 npm run preview
-Previews the production build.
+# Previews the production build.
 
 npm run lint
-Runs ESLint checks.
+# Runs ESLint checks.
 ```
 
 ### 🚀 Usage
